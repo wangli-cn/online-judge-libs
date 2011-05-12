@@ -1,0 +1,451 @@
+\documentclass{article}
+\usepackage{spconf,amsmath,epsfig}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{booktabs,threeparttable}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[top=10pt, left=10pt]{geometry}
+\usepackage{multicol}
+
+\begin{document}
+%\ninept
+
+%---------------------------------------------------------------
+\title{dotMnO2 ACM Programming Contest Library}
+\name{Meng Chao-Hong}
+\address{mno2.csie@gmail.com}
+\ninept
+\maketitle
+\begin{multicols}{2}
+\tableofcontents
+\end{multicols}
+\setcounter{secnumdepth}{1}
+%---------------------------------------------------------------
+
+% The settings of the Listing Package
+%---------------------------------------------------------------
+\lstset{language=c++}
+\lstset{frame=single}
+\lstset{linewidth=\textwidth}
+\lstset{breaklines=true}
+\lstset{basicstyle=\scriptsize}
+\lstset{keywordstyle=\color{blue}\bfseries}
+\lstset{commentstyle=\textit, stringstyle=\upshape,showspaces=false}
+%---------------------------------------------------------------
+
+\section{Notes}
+    \subsection{Counting Formula}
+        \begin{itemize}
+            \item 
+                \[
+                    \sum_{k=1}^n k^3 = \left( \frac{n(n+1)}{2} \right)^2 
+                \]
+            \item 
+                \[
+                    \sum_{k=1}^n k(k+1) = \frac{n(n+1)(n+2)}{3}
+                \]
+            \item
+                \[
+                    \sum_{k=1}^n k(k+1)(k+2) = \frac{n(n+1)(n+2)(n+3)}{4}
+                \]
+            \item
+                \[
+                    \sum_{k=1}^n k(k+1)(k+2)(k+3) = \frac{n(n+1)(n+2)(n+3)(n+4)}{5}
+                \]
+        \end{itemize}
+    \subsection{Trigonometric Function Formula}
+        \begin{itemize}
+            \item Centers of Triangle \\
+            Let $A, B, C$ be the three points of a triangle, $\vec{a} = \vec{BC}, \vec{b} = \vec{CA}, \vec{c} = \vec{AB}$. 
+                \begin{itemize}
+                \item Circumcenter
+                  \begin{equation*}
+                O = \alpha A + \beta B + \gamma C
+                  \end{equation*}
+                  \begin{equation*}
+                  \alpha = \frac{ |B-C|^2 (A-B) \cdot (A-C) }{ 2 | (A-B) \times (B-C) |^2}
+                  \end{equation*}
+
+                  \begin{equation*}
+                  \beta = \frac{ |A-C|^2 (B-A) \cdot (B-C) }{ 2 |(A-B) \times (B-C) |^2}
+                  \end{equation*}
+
+                  \begin{equation*}
+                  \gamma = \frac{ |A-B|^2 (C-A) \cdot (C-B)}{ 2 |(A-B) \times (B-C)|^2}
+                  \end{equation*}
+                \item Incenter 
+                  \begin{equation*}
+                I = \frac{|\vec{a}| A + | \vec{b} | B + | \vec{c} | C}{| \vec{a} |  + | \vec{b} | + | \vec{c} | }
+                  \end{equation*}
+                \item Median
+                  \begin{equation*}
+                M = \frac{A+B+C}{3}
+                  \end{equation*}
+                \item Orthocenter
+                  \begin{equation*}
+                H = \frac{ \alpha A + \beta B + \gamma C }{ \alpha + \beta + \gamma }
+                  \end{equation*}
+                  where,  $\alpha = (\vec{a} \cdot \vec{b})(\vec{a} \cdot \vec{c}), \beta = (\vec{b} \cdot \vec{c})(\vec{b} \cdot \vec{a}), \gamma = (\vec{c} \cdot \vec{a})(\vec{c} \cdot \vec{b})$
+                \end{itemize}
+        \end{itemize}
+\section{Data Structure: Basic}
+    \subsection{Queue}
+
+    \subsection{Linked List}
+
+\section{Data Structure: Tree}
+    \subsection{Binary Tree}
+
+    \subsection{Splay Tree}
+        \lstinputlisting{DataStructure/SplayTree.cpp}
+    \subsection{AVL Tree}
+        \lstinputlisting{DataStructure/avlTree.cpp}
+    \subsection{Red Black Tree}
+    \subsection{Size Balance Tree}
+    \subsection{Leftist Tree}
+    \subsection{Huffman Tree}
+    \subsection{1-dim Binary Indexed Tree}
+    \subsection{2-dim Binary Indexed Tree}
+    \subsection{Segment Tree}
+        \lstinputlisting{DataStructure/SegmentTree.cpp}
+    \subsection{Interval Tree}
+    \subsection{K-d Tree}
+        \lstinputlisting{DataStructure/kdTree.cpp}
+    \subsection{Link Cut Tree}
+        \lstinputlisting{DataStructure/LinkCutTree/LinkCutTree.cpp}
+
+\section{Data Structure: Heap}
+    \subsection{Min Heap}
+
+    \subsection{Treap}
+        \lstinputlisting{DataStructure/Treap.cpp}
+    \subsection{Pairing Heap}
+
+\section{Data Structure: Hash Table}
+    \subsection{String Hash Function}
+        \lstinputlisting{DataStructure/HashTable.cpp}
+    \subsection{Linear Probing}
+    \subsection{Universal Hash}
+
+\section{Data Structure: Disjoint Set}
+    \subsection{Fischer Algorithm}
+        \lstinputlisting{DataStructure/UnionFind.cpp}
+
+\section{Sorting}
+    \subsection{Bubble Sort}
+        \lstinputlisting{Sorting/BubbleSort.cpp}
+    \subsection{Insertion Sort}
+        \lstinputlisting{Sorting/InsertionSort.cpp}
+    \subsection{Selection Sort}
+        \lstinputlisting{Sorting/SelectionSort.cpp}
+    \subsection{Shell Sort}
+    \subsection{Counting Sort}
+        \lstinputlisting{Sorting/CountingSort.cpp}
+    \subsection{Bucket Sort}
+        \lstinputlisting{Sorting/BucketSort.cpp}
+    \subsection{Quick Sort}
+        \lstinputlisting{Sorting/QuickSort.cpp}
+    \subsection{Merge Sort}
+        \lstinputlisting{Sorting/MergeSort.cpp}
+    \subsection{Heap Sort}
+    \subsection{K-th Smallest Number}
+        \lstinputlisting{Sorting/KthElement.cpp}
+    \subsection{Inversion Number}
+        \lstinputlisting{Sorting/InversionNumber.cpp}
+
+\section{Combinatorics}
+    \subsection{Combinatorial}
+        \lstinputlisting{Combinatorics/Combinatorial.cpp}
+    \subsection{Counting: Let It Bead}
+        \lstinputlisting{Combinatorics/LetItBead.cpp}
+    \subsection{Counting: Color}
+        \lstinputlisting{Combinatorics/Color_2154.cpp}
+    \subsection{Counting: Integer Partition}
+        \lstinputlisting{Combinatorics/CountingIntegerPartition.cpp}
+    \subsection{Integer Partition}
+        \lstinputlisting{Combinatorics/IntegerPartition.cpp}
+    \subsection{Permutation: Rotation}
+
+    \subsection{Permutation: Alphabetical}
+        \lstinputlisting{Combinatorics/PermutationLexical.cpp}
+    \subsection{Next Permutation}
+        \lstinputlisting{Combinatorics/NextPermutation.cpp}
+    \subsection{Gray Code}
+        \lstinputlisting{Combinatorics/GrayCode.cpp}
+
+\section{Algebra}
+    \subsection{Roots Of Polynomial}
+    \subsection{Roots Of Cubic and Quartic}
+    \subsection{Linear Programming: Simplex}
+
+\section{Number Theory}
+    \subsection{Eratosthenes}
+        \lstinputlisting{NumberTheory/Eratosthenes.cpp}
+    \subsection{GCD}
+        \lstinputlisting{NumberTheory/GCD.cpp}
+    \subsection{Extended GCD}
+        \lstinputlisting{NumberTheory/ExtendedGCD.cpp}
+    \subsection{ModInverse}
+        \lstinputlisting{NumberTheory/Inverse.cpp}
+    \subsection{Linear Diophatine Equation Solver}
+        \lstinputlisting{NumberTheory/LinearModEquation.cpp}
+    \subsection{Successive Squaring}
+        \lstinputlisting{NumberTheory/PowerMod.cpp}
+    \subsection{Fibonnaci Number: Log N}
+    \subsection{Floyd Cycle Finding}
+        \lstinputlisting{NumberTheory/FloydCycleFinding.cpp}
+    \subsection{Huge Modulo}
+        \lstinputlisting{NumberTheory/HugeMod.cpp}
+    \subsection{Number Factoring}
+        \lstinputlisting{NumberTheory/Factoring.cpp}
+    \subsection{Chinese Remainder Theorem}
+        \lstinputlisting{NumberTheory/ChineseRemainder.cpp}
+    \subsection{Euler Totient Function}
+        \lstinputlisting{NumberTheory/EulerTotient.cpp}
+    \subsection{Mobius Function}
+
+    \subsection{Stern Brocot Tree}
+        \lstinputlisting{NumberTheory/SternBrocot.cpp}
+
+\section{Graph Theory}
+    \subsection{Topological Sort}
+        \lstinputlisting{GraphTheory/TopologicalSort.cpp}
+    \subsection{Lexicographic BFS}
+        \lstinputlisting{GraphTheory/LexBFS/LexBFS.cpp}
+    \subsection{Chordal Graph Recognition}
+        \lstinputlisting{GraphTheory/ChordalGraphRecognition/ChordalGraphRecognition.cpp}
+    \subsection{Cycle Detection}
+    \subsection{Caterpillar}
+    \subsection{Tree Diameter}
+        \lstinputlisting{GraphTheory/TreeDiameter.cpp}
+    \subsection{Tree Height}
+        \lstinputlisting{GraphTheory/TreeHeight.cpp}
+    \subsection{Average Distance}
+        \lstinputlisting{GraphTheory/AverageDistance.cpp}
+    \subsection{Minimum Spanning Tree: Kruskal}
+        \lstinputlisting{GraphTheory/Kruskal.cpp}
+    \subsection{Minimum Spanning Tree: Prim}
+        \lstinputlisting{GraphTheory/Prim.cpp}
+    \subsection{Minimum Directed Spanning Tree: Liu-Chu Edmonds}
+        \lstinputlisting{GraphTheory/LiuChu.cpp}
+    \subsection{Undirected Euler Path}
+    \subsection{Directed Euler Path}
+        \lstinputlisting{GraphTheory/DirectedEulerPath.cpp}
+    \subsection{Single Source Shortest Path: Dijkstra}
+        \lstinputlisting{GraphTheory/Dijkstra_STL.cpp}
+    \subsection{Single Source Shortest Path: Bellman Ford}
+        \lstinputlisting{GraphTheory/BellmanFord.cpp}
+    \subsection{Single Source Shortest Path: SPFA}
+        \lstinputlisting{GraphTheory/SPFA.cpp}
+    \subsection{Difference Constraint System}
+    \subsection{K-th Shortest Path}
+        \lstinputlisting{GraphTheory/KthShortestPath.cpp}
+    \subsection{Shortest Pair Paths}
+    
+    \subsection{All Pairs Shortest Path: Floyd Warshall}
+        \lstinputlisting{GraphTheory/FloydWarshall.cpp}
+    \subsection{All Pairs Shortest Path: Johnson}
+        \lstinputlisting{GraphTheory/Johnson.cpp}
+    \subsection{Max Flow: Ford Fulkerson}
+    \subsection{Max Flow: Edmond Karp}
+        \lstinputlisting{GraphTheory/EdmondKarp.cpp}
+    \subsection{Max Flow: Dinic}
+        \lstinputlisting{GraphTheory/Dinic.cpp}
+    \subsection{Max Flow: Relabel To Front}
+        \lstinputlisting{GraphTheory/RelabelToFront.cpp}
+    \subsection{Min Cost Max Flow: Primal Dual}
+        \lstinputlisting{GraphTheory/PrimalDual.cpp}
+    \subsection{Min Cut: Stoer Wagner}
+        \lstinputlisting{GraphTheory/StoerWagner.cpp}
+    \subsection{Articulation Point}
+        \lstinputlisting{GraphTheory/ArticulationPoint.cpp}
+    \subsection{Bridge Detection}
+        \lstinputlisting{GraphTheory/BridgeDetection.cpp}
+    \subsection{Strongly Connected Component: Tarjan}
+        \lstinputlisting{GraphTheory/StronglyConnectedComponent_Tarjan/StronglyConnectedComponent.cpp}
+    \subsection{Strongly Connected Component: Kusaraju}
+        \lstinputlisting{GraphTheory/StronglyConnectedComponent_Kusaraju/StronglyConnectedComponent.cpp}
+    \subsection{Maximum Matching: Bipartite Graph}
+        \lstinputlisting{GraphTheory/BipartiteMatching.cpp}
+    \subsection{Maximum Matching: Simple Graph}
+    \subsection{Hungarian Algorithm}
+        \lstinputlisting{GraphTheory/Hungarian.cpp}
+    \subsection{Chromatic Number}
+        \lstinputlisting{GraphTheory/ChromaticNumber.cpp}
+    \subsection{Minimal Steiner Tree}
+    \subsection{Maximum Clique}
+    \subsection{Dominating Set}
+        \lstinputlisting{GraphTheory/DominatingSet.cpp}
+    \subsection{Independent Set: Tree}
+        \lstinputlisting{GraphTheory/IndependentSetOfTree.cpp}
+    \subsection{Stable Marriage}
+        \lstinputlisting{GraphTheory/StableMarriage.cpp}
+    \subsection{Chinese Mailman}
+    \subsection{Traveling Sailsman}
+    \subsection{Hamilton Path}
+        \lstinputlisting{GraphTheory/Hamilton.cpp}
+    \subsection{Least Common Ancestor}
+        \lstinputlisting{GraphTheory/LeastCommonAncestor_Tarjan/LeastCommonAncestor.cpp}
+
+\section{Geometry}
+    \subsection{Intersection Determination}
+        \lstinputlisting{Geometry/Intersection.cpp}
+    \subsection{Distance Calculation}
+        \lstinputlisting{Geometry/Distance.cpp}
+    \subsection{Simple Polygon Area}
+        \lstinputlisting{Geometry/PolygonArea.cpp}
+    \subsection{is Simple Polygon Convex}
+        \lstinputlisting{Geometry/isConvex.cpp}
+    \subsection{Simple Polygon Contain}
+        \lstinputlisting{Geometry/SimplePolygonContain.cpp}
+    \subsection{Convex Polygon Contain}
+        \lstinputlisting{Geometry/ConvexPolygonContain.cpp}
+    \subsection{Convex Polygon Cut}
+        \lstinputlisting{Geometry/ConvexPolygonCut.cpp}
+    \subsection{Convex Polygon Diameter}
+        \lstinputlisting{Geometry/RotatingCaliper.cpp}
+    \subsection{Great Circle}
+    \subsection{Circle Through 3 Points}
+    \subsection{Circle of a given Radius Through 2 Points}
+    \subsection{Triangle Area From Medians}
+        \lstinputlisting{Geometry/TriangleAreaFromMedians.cpp}
+    \subsection{Convex Hull: Jarvis March}
+    \subsection{Convex Hull: Graham Scan}
+        \lstinputlisting{Geometry/GrahamScan.cpp}
+    \subsection{Convex Hull: Andrew Monotone Chain}
+        \lstinputlisting{Geometry/AndrewMonotoneChain.cpp}
+    \subsection{Closet Pair}
+        \lstinputlisting{Geometry/ClosestPair.cpp}
+    \subsection{Sweep Line}
+        \lstinputlisting{Geometry/SweepLine.cpp}
+    \subsection{Area of Union of Rectangles}
+        \lstinputlisting{Geometry/AreaOfRectangleUnion.cpp}
+    \subsection{Pick's Theorem}
+
+\section{Dynamic Programming}
+    \subsection{Optimal Array Multiplication Sequence}
+        \lstinputlisting{DynamicProgramming/OptimalArrayMultiply.cpp}
+    \subsection{Optimal Binary Search Tree}
+    \subsection{Knapsack}
+
+    \subsection{Patrik}
+        \lstinputlisting{DynamicProgramming/Patrik.cpp}
+    \subsection{Longest Common Subsequence: O(mn)}
+        \lstinputlisting{DynamicProgramming/LongestCommonSubsequence.cpp}
+    \subsection{Longest Increasing Subsequence: O(NlogN)}
+        \lstinputlisting{DynamicProgramming/LongestIncreasingSubsequence_Fast.cpp}
+    \subsection{Coin Exchange}
+        \lstinputlisting{DynamicProgramming/CoinExchange.cpp}
+    \subsection{Maximum Sum}
+    \subsection{2D Maximum Sum}
+
+    \subsection{Alpha Codes}
+    
+    \subsection{Alignment: Needleman-Wunsch}
+        \lstinputlisting{DynamicProgramming/NeedlemanWunsch.cpp}
+    \subsection{Post Office}
+        \lstinputlisting{DynamicProgramming/PostOffice.cpp}
+    \subsection{Copying Books}
+        \lstinputlisting{DynamicProgramming/CopyingBooks.cpp}
+    \subsection{Colored Stones}
+
+    \subsection{String Painter}
+        \lstinputlisting{DynamicProgramming/StringPainter.cpp}
+    \subsection{Space Elevator}
+        \lstinputlisting{DynamicProgramming/SpaceElevator_4266.cpp}
+
+\section{Greedy}
+    \subsection{Scheduling}
+        \lstinputlisting{Greedy/IntervalScheduling.cpp}
+    \subsection{Gone Fishing}
+
+\section{String Processing}
+    \subsection{String Matching: Knuth Morris Pratt}
+        \lstinputlisting{String/KnuthMorrisPratt.cpp}
+    \subsection{String Matching: Boyer Moore}
+        \lstinputlisting{String/BoyerMoore.cpp}
+    \subsection{String Matching: Rabin-Karp}
+    \subsection{Trie}
+        \lstinputlisting{String/Trie.cpp}
+    \subsection{Suffix Array: Doubling}
+        \lstinputlisting{String/SuffixArray.cpp}
+    \subsection{Suffix Array: Larsson Sadakane}
+        \lstinputlisting{String/LarssonSadakane.cpp}
+    \subsection{Suffix Tree}
+    \subsection{Longest Common String}
+    \subsection{Baker Bird}
+        \lstinputlisting{String/BakerBird.cpp}
+
+\section{Range Minimum Query}
+    \subsection{Sparse Table}
+        \lstinputlisting{RangeMinimumQuery/Doubling.cpp}
+
+\section{Matrix}
+    \subsection{Rank}
+        \lstinputlisting{Matrix/Rank.cpp}
+    \subsection{Power of Matrix}
+        \lstinputlisting{Matrix/Fibonacci.cpp}
+    \subsection{Power Series of Matrix}
+        \lstinputlisting{Matrix/MatrixPowerSeries_3233.cpp}
+    \subsection{Linear Equation on Zp}
+        \lstinputlisting{Matrix/WidgetFactory_2947.cpp}
+    \subsection{LU Decomposition}
+        \lstinputlisting{Matrix/LU.cpp}
+    \subsection{Eigen Value}
+        \lstinputlisting{Matrix/EigenValue.cpp}
+    \subsection{Fast Fourier Tranform}
+        \lstinputlisting{Algebra/FastFourierTransform.cpp}
+
+\section{Grammar}
+    \subsection{LL1 Parser}
+        \lstinputlisting{Grammar/LL1.cpp}
+    \subsection{Shunting Yard Alorithm}
+
+\section{Search}
+    \subsection{Binary Search}
+        \lstinputlisting{Search/BinarySearch.cpp}
+    \subsection{Stick}
+    \subsection{Blue Jeans}
+    \subsection{Eight Puzzle}
+    \subsection{Kth Element of N array}
+    \subsection{Banker's Algorithm}
+        \lstinputlisting{Search/BankerAlgorithm.cpp}
+
+\section{Games}
+    \subsection{N Queens}
+    \subsection{Game Of Life}
+    \subsection{Nim Game}
+        \lstinputlisting{Games/Nim_2068.cpp}
+    \subsection{Knight Tour}
+    \subsection{Sudoku}
+
+    \subsection{Joseph Problem}
+        \lstinputlisting{Games/JosephProblem.cpp}
+    \subsection{Joseph Probelm: Every Second}
+    
+    \subsection{2 SAT}
+        \lstinputlisting{Games/2SAT.cpp}
+
+\section{Bit Operation}
+    \subsection{Find Next Number with The Same Number of 1}
+
+\section{Big Number}
+    \subsection{Big Unsigned Int}
+        \lstinputlisting{BigNumber/BigNum.cpp}
+    \subsection{JAVA BigInteger}
+    \subsection{JAVA BigDecimal}
+
+\section{Utility}
+    \subsection{Day Of The Week}
+    \subsection{Calendar}
+        \lstinputlisting{Utility/Calendar.cpp}
+    \subsection{Honeycomb Structure}
+        \lstinputlisting{Utility/HoneyComb.cpp}
+    \subsection{Roman Number}
+
+\section{C++ STL Examples}
+
+\end{document}
+
