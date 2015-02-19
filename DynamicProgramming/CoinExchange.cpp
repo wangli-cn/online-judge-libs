@@ -25,16 +25,14 @@ vector<int> CoinExchange(int C, vector<int> &cs)
     }
 
     vector<int> zs;
-    for (int c = C; c > 0; c = ys[c]) 
+    for (int c = C; c > 0; c = ys[c])
         zs.push_back(c - ys[c]);
     return zs;
 }
 
 int main(void)
 {
-    int a[4] = {1, 3, 4, 5};
-    vector<int> cs(a, a+4);
-
+    vector<int> cs {1, 3, 4, 5};
     vector<int> res = CoinExchange(7, cs);
     copy(res.begin(), res.end(), ostream_iterator<int>(cout, " "));
     return 0;

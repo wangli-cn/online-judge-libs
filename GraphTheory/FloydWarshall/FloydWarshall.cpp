@@ -14,11 +14,11 @@ typedef int Weight;
 #define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
 #define ALL(c) (c).begin(), (c).end()
 
-struct Edge 
+struct Edge
 {
     int src, dst;
     Weight weight;
-    Edge(int src, int dst, Weight weight) 
+    Edge(int src, int dst, Weight weight)
         :src(src), dst(dst), weight(weight) {}
 };
 
@@ -61,7 +61,7 @@ vector<int> buildPath(const vector< vector<int> > &inter, int s, int t)
     return path;
 }
 
-int main(void)
+int main()
 {
     return 0;
 }

@@ -5,7 +5,7 @@
  */
 #include <iostream>
 #include <cstring>
-#include <climits>
+#include <limits>
 
 using namespace std;
 
@@ -22,10 +22,10 @@ int DP(int i, int j)
 {
     if (f[i][j] != -1) return f[i][j];
     if (j == 0) return f[i][j] = 0;
-    if (i == 0) return f[i][j] = INT_MAX;
+    if (i == 0) return f[i][j] = std::numeric_limits<int>::max();
 
     int tmp;
-    f[i][j] = INT_MAX;
+    f[i][j] = std::numeric_limits<int>::max();
     for (int k = i-1; k < j; ++k) {
         tmp = max(DP(i-1, k), Sum(k+1, j));
         f[i][j] = min(tmp, f[i][j]);
@@ -43,7 +43,7 @@ int main(void)
         scanf("%d%d", &m, &k);
         for (int i = 1; i <= m; ++i)
             scanf("%d", &book[i]);
-        
+
         total[0] = 0;
         for (int i = 1; i <= m; ++i)
             total[i] = total[i-1] + book[i];

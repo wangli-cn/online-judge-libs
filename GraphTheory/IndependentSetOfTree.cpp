@@ -1,20 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include "graphtool.h"
 
 using namespace std;
-
-#define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-
-struct Edge 
-{
-    int src, dst;
-    Edge(int src, int dst) 
-        :src(src), dst(dst) {}
-};
-
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
 
 const int MAXN = 205;
 int f[MAXN][2], s[MAXN][2];
@@ -61,7 +50,7 @@ int main(void)
     g[1].push_back(Edge(1, 0));
     g[2].push_back(Edge(2, 0));
 
-    int a = DP(g, 0, -1, 0); 
+    int a = DP(g, 0, -1, 0);
     int b = DP(g, 0, -1, 1);
     if (a == b) cout << a << " No" << endl;
     else if (a > b) {

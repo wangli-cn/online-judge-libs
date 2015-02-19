@@ -2,25 +2,13 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include "graphtool.h"
 
 using namespace std;
-
-typedef int Weight;
-const int INF = 9999999;
 
 #define REP(i, n) for(int i = 0; i < (int)n; ++i)
 #define FOR(i, c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
 
-struct Edge 
-{
-    int src, dst;
-    Weight weight;
-    Edge(int src, int dst, Weight weight) 
-        :src(src), dst(dst), weight(weight) {}
-};
-
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
 
 bool BellmanFord(const Graph &g, int s, vector<Weight> &dist, vector<int> &prev)
 {
@@ -52,12 +40,12 @@ vector<int> buildPath(const vector<int> &prev, int t)
     return path;
 }
 
-int main(void)
+int main()
 {
     vector<Weight> dist;
     vector<int> prev;
     Graph g;
-    
+
     g.resize(3);
     g[0].push_back(Edge(0, 1, 101));
     g[1].push_back(Edge(1, 2, 1));
@@ -65,7 +53,7 @@ int main(void)
 
     BellmanFord(g, 0, dist, prev);
     vector<int> path = buildPath(prev, 2);
-    
+
     cout << dist[2] << endl;
     copy(path.begin(), path.end(), ostream_iterator<int>(cout, " "));
     return 0;

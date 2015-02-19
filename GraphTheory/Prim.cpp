@@ -1,19 +1,19 @@
 #include <iostream>
 #include <queue>
-#include <climits>
+#include <limits>
 
 using namespace std;
 
-const int INF = INT_MAX;
+const int INF = std::numeric_limits<int>::max();
 typedef int Weight;
 
 #define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
 
-struct Edge 
+struct Edge
 {
     int src, dst;
     Weight weight;
-    Edge(int src, int dst, Weight weight) 
+    Edge(int src, int dst, Weight weight)
         :src(src), dst(dst), weight(weight) {}
 };
 
@@ -32,7 +32,7 @@ pair<Weight, Edges> Prim(const Graph &g, int r = 0)
     Edges T;
     Weight total = 0;
 
-    vector<bool> visited(n);
+    vector<bool> visited(n, false);
     priority_queue<Edge> Q;
     for (Q.push(Edge(-1, r, 0)); !Q.empty(); ) {
         Edge e = Q.top(); Q.pop();

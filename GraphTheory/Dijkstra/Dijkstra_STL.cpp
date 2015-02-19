@@ -2,21 +2,21 @@
 #include <vector>
 #include <queue>
 #include <iterator>
-#include <climits>
+#include <limits>
 #include <algorithm>
 
 using namespace std;
 
-const int INF = INT_MAX;
+const int INF = std::numeric_limits<int>::max();
 typedef int Weight;
 
 #define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
 
-struct Edge 
+struct Edge
 {
     int src, dst;
     Weight weight;
-    Edge(int src, int dst, Weight weight) 
+    Edge(int src, int dst, Weight weight)
         :src(src), dst(dst), weight(weight) {}
 };
 
@@ -51,7 +51,7 @@ void Dijkstra(const Graph &g, int s, vector<Weight> &dist, vector<int> &prev)
 vector<int> buildPath(const vector<int> &prev, int t)
 {
     vector<int> path;
-    for (int u = t; u >= 0; u = prev[u]) 
+    for (int u = t; u >= 0; u = prev[u])
         path.push_back(u);
     reverse(path.begin(), path.end());
     return path;
@@ -62,7 +62,7 @@ int main(void)
     vector<Weight> dist;
     vector<int> prev;
     Graph g;
-    
+
     g.resize(3);
     g[0].push_back(Edge(0, 1, 101));
     g[1].push_back(Edge(1, 2, 1));
@@ -70,7 +70,7 @@ int main(void)
 
     Dijkstra(g, 0, dist, prev);
     vector<int> path = buildPath(prev, 2);
-    
+
     cout << dist[2] << endl;
     copy(path.begin(), path.end(), ostream_iterator<int>(cout, " "));
 

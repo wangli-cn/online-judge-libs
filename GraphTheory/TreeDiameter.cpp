@@ -1,22 +1,8 @@
 #include <iostream>
 #include <vector>
+#include "graphtool.h"
 
 using namespace std;
-
-typedef int Weight;
-
-#define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-
-struct Edge
-{
-    int src, dst;
-    Weight weight;
-    Edge(int src, int dst, Weight weight) 
-        :src(src), dst(dst), weight(weight) {}
-};
-
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
 
 typedef pair<Weight, int> Result;
 

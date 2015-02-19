@@ -3,26 +3,9 @@
 #include <queue>
 #include <algorithm>
 #include <iterator>
+#include "graphtool.h"
 
 using namespace std;
-
-const int INF = 9999999;
-
-#define REP(i, n) for(int i = 0; i < (int)n; ++i)
-#define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-
-typedef int Weight;
-
-struct Edge 
-{
-    int src, dst;
-    Weight weight;
-    Edge(int src, int dst, Weight weight) 
-        :src(src), dst(dst), weight(weight) {}
-};
-
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
 
 typedef vector<Weight> Array;
 typedef vector<Array> Matrix;
@@ -55,7 +38,7 @@ Weight EdmondKarp(const Graph &g, int s, int t)
     }
 }
 
-int main(void)
+int main()
 {
     int N, M;
     int src, dst;

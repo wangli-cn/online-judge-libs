@@ -2,33 +2,14 @@
 #include <vector>
 #include <queue>
 #include <iterator>
-#include <climits>
+#include <limits>
 #include <algorithm>
+#include "graphtool.h"
 
 using namespace std;
 
-const int INF = INT_MAX;
-typedef int Weight;
-
 #define REP(i,n) for(int i = 0; i < (int)n; ++i)
 #define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-
-struct Edge 
-{
-    int src, dst;
-    Weight weight;
-    Edge(int src, int dst, Weight weight) 
-        :src(src), dst(dst), weight(weight) {}
-};
-
-bool operator<(const Edge &e, const Edge &f)
-{
-    return (e.weight != f.weight) ? e.weight > f.weight :
-           (e.src != f.src) ? e.src > f.src : e.dst > f.dst;
-}
-
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
 
 struct UnionFind
 {
@@ -76,7 +57,7 @@ pair<Weight, Edges> Kruskal(const Graph &g)
     return pair<Weight, Edges>(total, F);
 }
 
-int main(void)
+int main()
 {
     return 0;
 }

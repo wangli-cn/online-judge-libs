@@ -1,7 +1,7 @@
 /**
  *
  * Complexity: Preprocessing with O(N log N), Query with O(1)
- * Test Field: 
+ * Test Field:
  */
 #include <iostream>
 #include <vector>
@@ -13,7 +13,7 @@ void buildSparseTable(vector<int> &a, vector< vector<int> > &M)
 {
     int n = a.size();
     int i, j;
-    
+
     for (i = 0; i < n; ++i)
         M[i][0] = i;
 
@@ -21,7 +21,7 @@ void buildSparseTable(vector<int> &a, vector< vector<int> > &M)
         for (i = 0; i+(1<<j)-1 < n; ++i) {
             if (a[M[i][j-1]] > a[M[i+(1<<(j-1))][j-1]])
                 M[i][j] = M[i][j-1];
-            else 
+            else
                 M[i][j] = M[i+(1<<(j-1))][j-1];
         }
     }
@@ -37,15 +37,13 @@ int RMQ(vector<int> &a, vector< vector<int> > &M, int l, int r)
 
     if (a[M[l][k]] > a[M[r-(1<<k)+1][k]])
         return a[M[l][k]];
-    else 
+    else
         return a[M[r-(1<<k)+1][k]];
 }
 
 int main(void)
 {
-    int a[8] = {6, 1, 2, 3, 1, 5, 1000, 1};
-
-    vector<int> arr(a, a+8);
+    vector<int> arr {6, 1, 2, 3, 1, 5, 1000, 1};
     vector< vector<int> > M(8, vector<int>(4));
 
     buildSparseTable(arr, M);

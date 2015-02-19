@@ -1,22 +1,13 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "graphtool.h"
 
 using namespace std;
 
 #define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
 #define REP(i,n) for(int i = 0; i < (int)n; ++i)
 #define ALL(c) (c).begin(), (c).end()
-
-struct Edge 
-{
-    int src, dst;
-    Edge(int src, int dst) 
-        :src(src), dst(dst) {}
-};
-
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
 
 void visit(Graph &g, int a, vector<int> &path)
 {
