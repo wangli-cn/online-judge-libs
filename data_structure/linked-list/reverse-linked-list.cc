@@ -1,57 +1,42 @@
 #include <iostream>
+#include "linkedlist.h"
 
 using namespace std;
 
-#define REP(i,n) for (int i = 0; i < (int)n; ++i)
-
-struct Node
+Node<int> *reverse(Node<int> *curr)
 {
-    Node(int data) :next(NULL), data(data) {}
+    if (curr->next == nullptr) return curr;
 
-    Node *next;
-    int data;
-};
-
-Node *reverse(Node *curr)
-{
-    if (curr->next == NULL) return curr;
-
-    Node *head = reverse(curr->next);
+    Node<int> *head = reverse(curr->next);
     curr->next->next = curr;
-    curr->next = NULL;
+    curr->next = nullptr;
     return head;
 }
 
-void release(Node *curr)
+Node<int> *reverse_iterative(Node<int> *head)
 {
-    if (curr != NULL) {
-        release(curr->next);
-        delete curr;
+    if (head == nullptr) return nullptr;
+
+    Node<int> *prev = nullptr, *curr = head;
+    while (curr != nullptr) {
+        Node<int> *next = curr->next;
+        curr->next = prev;
+
+        prev = curr;
+        curr = next;
     }
+
+    return prev;
 }
 
-int main(void)
+int main()
 {
-    Node *head = NULL, *tail = NULL;
+    auto head = build_linked_list();
+    Node<int> *reversed = reverse(head);
+    print_list(reversed);
 
-    REP(i, 10) {
-        Node *curr = new Node(i);
-
-        if (head == NULL) {
-            head = tail = curr;
-        } else {
-            tail->next = curr;
-            tail = tail->next;
-        }
-    }
-
-    head = reverse(head);
-    Node *p = head;
-
-    while (p != NULL) {
-        cout << p->data << endl;
-        p = p->next;
-    }
+    Node<int> *rreversed = reverse_iterative(reversed);
+    print_list(rreversed);
 
     return 0;
 }

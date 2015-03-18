@@ -1,19 +1,11 @@
 #include <iostream>
+#include "linkedlist.h"
 
-using namespace std;
-
-struct Node 
+Node<int> *find_beginning(Node<int> *head)
 {
-    int data;
-    Node *next;
-};
+    Node<int> *r1 = head, *r2 = head;
 
-Node *find_beginning(Node *head)
-{
-    Node *r1 = head;
-    Node *r2 = head;
-
-    while (r2->next != NULL) {
+    while (r2->next != nullptr) {
         r1 = r1->next;
         r2 = r2->next->next;
 
@@ -22,7 +14,7 @@ Node *find_beginning(Node *head)
         }
     }
 
-    if (r2->next == NULL) return NULL;
+    if (r2 == nullptr || r2->next == nullptr) return nullptr;
 
     r1 = head;
     while (r1 != r2) {
@@ -35,5 +27,16 @@ Node *find_beginning(Node *head)
 
 int main(void)
 {
+    auto head = build_linked_list();
+
+    print_list(head);
+    auto target = find_beginning(head);
+
+    if (target == nullptr) {
+        std::cout << "not found" << std::endl;
+    } else {
+        std::cout << target->val << std::endl;
+    }
+
     return 0;
 }
