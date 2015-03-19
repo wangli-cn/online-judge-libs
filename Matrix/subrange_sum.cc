@@ -37,3 +37,8 @@ bool find_sub_range(int A[], int len, int sum, int &start, int &end)
 
     return false;
 }
+
+int main()
+{
+    return 0;
+}
