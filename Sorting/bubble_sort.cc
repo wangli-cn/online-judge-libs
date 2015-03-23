@@ -24,8 +24,8 @@ int main()
 {
     vector<int> a { 6, 5, 4, 3, 2, 1 };
     bubble_sort(a);
-    for (auto i: a) {
-        std::cout << i << ' ';
+    for (auto elem: a) {
+        std::cout << elem << ' ';
     }
     std::cout << std::endl;
 
