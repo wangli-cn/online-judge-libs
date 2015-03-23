@@ -24,8 +24,7 @@ int select(vector<int> &a, int k)
 
 int main(void)
 {
-    int a[8] = {1000, 999, 1001, 7, 3, 2, 1, 10000};
-    vector<int> vec(a, a+8);
-    cout << select(vec, 0) << endl;
+    vector<int> a {1000, 999, 1001, 7, 3, 2, 1, 10000};
+    cout << select(a, 0) << endl;
     return 0;
 }
