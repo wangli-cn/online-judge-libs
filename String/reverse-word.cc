@@ -26,7 +26,7 @@ string reverse_word(string &s)
 
 int main(void)
 {
-    string s("This is a \t book");
+    string s("   This \t is a \t book");
     cout << reverse_word(s) << endl;
 
     return 0;

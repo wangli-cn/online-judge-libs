@@ -1,3 +1,9 @@
+//============================================================================
+// Given an array of strings, return all groups of strings that are anagrams.
+//
+// Note: All inputs will be in lower-case.
+//============================================================================
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -7,13 +13,13 @@ using namespace std;
 
 typedef vector< vector<string> > VVS;
 
-#define REP(i, n) for(int i = 0; i < (int)n; ++i) 
+#define REP(i, n) for(int i = 0; i < (int)n; ++i)
 #define FOR(i, c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
 
 struct Word
 {
-    Word(const string &t) :s(t) { 
-        sort(s.begin(), s.end()); 
+    Word(const string &t) :s(t) {
+        sort(s.begin(), s.end());
     }
 
     string s;
@@ -21,7 +27,7 @@ struct Word
 
 bool operator<(const Word &a, const Word &b)
 {
-    return a.s < b.s; 
+    return a.s < b.s;
 }
 
 vector< vector<string> > anagram(const vector<string> &a)
@@ -37,7 +43,7 @@ vector< vector<string> > anagram(const vector<string> &a)
 
     n = words.size();
     vector< vector<string> > res;
-    vector<string> tmp; 
+    vector<string> tmp;
 
     tmp.push_back(words[0].s);
     for (int i = 1; i < n; i++) {
@@ -47,33 +53,27 @@ vector< vector<string> > anagram(const vector<string> &a)
             res.push_back(tmp);
             tmp.clear();
             tmp.push_back(words[i].s);
-        } 
+        }
     }
 
     if (tmp.size() != 0) {
         res.push_back(tmp);
     }
 
-    return res;
+    return std::move(res);
 }
 
-int main(void) 
+int main(void)
 {
-    vector<string> words;
-
-    words.push_back(string("star"));
-    words.push_back(string("arts"));
-    words.push_back(string("car"));
-    words.push_back(string("arc"));
-    words.push_back(string("go"));
+    vector<string> words {string("star"), string("arts"), string("car"), string("arc"), string("go") };
 
     VVS t = anagram(words);
-    FOR(i, t) { 
+    FOR(i, t) {
         cout << "[";
         FOR(j, *i) {
             cout << *j << " ";
-        } 
-        cout << "]";
+        }
+        cout << "] ";
     }
     cout << endl;
 

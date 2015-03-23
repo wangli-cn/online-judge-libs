@@ -1,3 +1,5 @@
+#include <iostream>
+
 int count_words(const char *s)
 {
     bool in_word = false;
@@ -14,4 +16,11 @@ int count_words(const char *s)
     }
 
     return word_cnt;
+}
+
+int main()
+{
+    const char *s = "ab d    fe  grq ";
+    std::cout << count_words(s) << std::endl;
+    return 0;
 }

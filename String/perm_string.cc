@@ -1,3 +1,11 @@
+//============================================================================
+// Given a collection of numbers, return all possible permutations.
+//
+// For example,
+// [1,2,3] have the following permutations:
+// [1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], and [3,2,1].
+//============================================================================
+
 #include <iostream>
 #include <string>
 
@@ -20,12 +28,16 @@ void lexical_permutation(string &s, int pos)
     }
 
     char c = s[pos];
-    for (int i = pos+1; i < n; i++) 
+    for (int i = pos+1; i < n; i++)
         s[i-1] = s[i];
     s[n-1] = c;
 }
 
 int main(void)
 {
+    string s("123");
+
+    lexical_permutation(s, 0);
+
     return 0;
 }
