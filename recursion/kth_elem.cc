@@ -22,16 +22,13 @@ int select(vector<int> &a, int k, int l, int r)
 
     int t = i-l+1;
     if (k == t) return a[i];
-    else if (k < t) select(a, k, l, i-1);
-    else if (k > t) select(a, k-t, i+1, r);
+    else if (k < t) return select(a, k, l, i-1);
+    else return select(a, k-t, j+1, r);
 }
 
 int main(void)
 {
-    int a[8] = {1000, 999, 1001, 7, 3, 2, 1, 10000};
-    vector<int> vec(a, a+8);
-
+    vector<int> vec {1000, 999, 1001, 7, 3, 2, 1, 10000};
     cout << select(vec, 1, 0, 7) << endl;
-
     return 0;
 }

@@ -35,9 +35,7 @@ vector<int> lis(const vector<int> &a)
 
 int main(void)
 {
-    int arr[8] = {3,2,1,100,2,3,11,4};
-    vector<int> a(arr, arr+8);
-
+    vector<int> a {3,2,1,100,2,3,11,4};
     vector<int> res = lis(a);
     copy(res.begin(), res.end(), ostream_iterator<int>(cout, " "));
 

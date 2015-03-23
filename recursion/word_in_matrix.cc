@@ -3,9 +3,9 @@
 
 using namespace std;
 
-bool has_word_helper(char *A[], int m, int n, char *word, int i, int j, vector<vector<bool> > &visited)
+bool has_word_helper(const char *A[], int m, int n, const char *word, int i, int j, vector<vector<bool> > &visited)
 {
-    if (word == NULL) return true;
+    if (word == nullptr) return true;
     if (*word == '\0') return true;
 
     if (i < 0 || i >= m) return false;
@@ -26,7 +26,7 @@ bool has_word_helper(char *A[], int m, int n, char *word, int i, int j, vector<v
     return false;
 }
 
-bool has_word(char *A[], int m, int n, char *word)
+bool has_word(const char *A[], int m, int n, const char *word)
 {
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
@@ -42,6 +42,6 @@ bool has_word(char *A[], int m, int n, char *word)
 
 int main()
 {
-    char *matrix[] = {"woc", "dba", "atc"};
+    const char *matrix[] = {"woc", "dba", "atc"};
     cout << has_word(matrix, 3, 3, "cow") << endl;
 }
