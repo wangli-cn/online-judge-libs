@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <iterator>
 
 using namespace std;
 
@@ -23,11 +22,14 @@ void quick_sort(vector<int> &a, int l, int r)
     }
 }
 
-int main(void)
+int main()
 {
-    vector<int> a {6,5,4,3,2,1};
+    vector<int> a {6, 5, 4, 3, 2, 1};
     quick_sort(a, 0, 5);
 
-    copy(a.begin(), a.end(), ostream_iterator<int>(cout, " "));
+    for (auto elem: a) {
+        std::cout << elem << ' ';
+    }
+    std::cout << std::endl;
     return 0;
 }

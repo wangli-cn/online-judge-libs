@@ -1,10 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <iterator>
 
 using namespace std;
 
-void InsertionSort(vector<int> &a)
+void insertion_sort(vector<int> &a)
 {
     int n = a.size();
     int i, j, val;
@@ -18,12 +17,14 @@ void InsertionSort(vector<int> &a)
     }
 }
 
-int main(void)
+int main()
 {
-    int a[8] = {8, 9, 2, 1, 100, 2, 3, 8};
-    vector<int> vec(a, a+8);
+    vector<int> a {8, 9, 2, 1, 100, 2, 3, 8};
+    insertion_sort(a);
 
-    InsertionSort(vec);
-    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    for (auto elem: a) {
+        std::cout << elem << ' ';
+    }
+    std::cout << std::endl;
     return 0;
 }

@@ -1,10 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <iterator>
 
 using namespace std;
 
-void SelectionSort(vector<int> &a)
+void selection_sort(vector<int> &a)
 {
     int n = a.size();
 
@@ -15,17 +14,19 @@ void SelectionSort(vector<int> &a)
                 idx = j;
         }
 
-        if (i != idx) 
+        if (i != idx)
             swap(a[i], a[idx]);
     }
 }
 
 int main(void)
 {
-    int a[8] = {8, 9, 2, 1, 100, 2, 3, 8};
-    vector<int> vec(a, a+8);
+    vector<int> a {8, 9, 2, 1, 100, 2, 3, 8};
+    selection_sort(a);
 
-    SelectionSort(vec);
-    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    for (auto elem: a) {
+        std::cout << elem << ' ';
+    }
+    std::cout << std::endl;
     return 0;
 }
