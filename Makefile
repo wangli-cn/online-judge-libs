@@ -1,9 +1,12 @@
 .PHONY: all clean
 
-all: dotMnO2
+all: build
 
-dotMnO2:
-	pdflatex dotMnO2
+build:
+	$(MAKE) -C sorting/Makefile
+
+book:
+	pdflatex book
 
 clean:
 	-rm -f *.log *.aux *.lol *.toc
