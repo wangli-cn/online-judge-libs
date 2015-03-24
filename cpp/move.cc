@@ -5,7 +5,6 @@ using namespace std;
 vector<int> make_vec(int repeat)
 {
     vector<int> v(10, repeat);
-
     return std::move(v);
 }
 
