@@ -1,117 +1,132 @@
-//Hash函数  数据1   数据2   数据3   数据4   数据1得分   数据2得分   数据3得分   数据4得分   平均分
-//BKDRHash  2   0   4774    481 96.55   100 90.95   82.05   92.64
-//APHash    2   3   4754    493 96.55   88.46   100 51.28   86.28
-//DJBHash   2   2   4975    474 96.55   92.31   0   100 83.43
-//JSHash    1   4   4761    506 100 84.62   96.83   17.95   81.94
-//RSHash    1   0   4861    505 100 100 51.58   20.51   75.96
-//SDBMHash  3   2   4849    504 93.1    92.31   57.01   23.08   72.41
-//PJWHash   30  26  4878    513 0   0   43.89   0   21.95
-//ELFHash   30  26  4878    513 0   0   43.89   0   21.95
-
 #include <iostream>
 #include <vector>
 #include <string>
 #include <list>
 
-using namespace std;
+const int DEFAULT_SIZE = 20627;
 
-#define REP(i,n) for (int i = 0; i < (int)n; ++i)
-
-template <typename T>
-struct Slot {
-    T data;
-    Slot(T data) :data(data) {}
-};
-
-int M = 20627;
-
-unsigned DJBHash(const char *str)
+template <class Key, class T, class Hash = std::hash<Key>, class Pred = std::equal_to<Key> >
+class hash_map
 {
-    unsigned hash = 5381;
+public:
+    using key_type=Key;
+    typedef std::pair<Key, T> value_type;
+    typedef T mapped_type;
+    typedef Pred key_equal;
 
-    while (*str) {
-        hash += (hash << 5) + (*str++);
+    class reference {
+    public:
+        reference() = delete;
+
+        mapped_type operator()() const {
+            return owner_.find(key_);
+        }
+
+        reference& operator=(const mapped_type& val) {
+            mapped_type v;
+
+            bool done = owner_.find(key_, v);
+            if (done) {
+                //FIXME:
+            } else {
+                owner_.insert(key_, val);
+            }
+
+            return *this;
+        }
+
+    private:
+        reference(hash_map& owner, const key_type &key) :owner_(owner), key_(key) {}
+
+        hash_map& owner_;
+        const key_type& key_;
+
+        friend class hash_map;
+    };
+
+private:
+    static const bool is_simple = std::is_pod<key_type>::value && sizeof(key_type) <= 0;
+    static const bool value_copy_assignable = std::is_copy_assignable<mapped_type>::value;
+
+
+public:
+    explicit hash_map(size_t n = DEFAULT_SIZE) {
+        for (int i = 0; i < n; i++) {
+            buckets_.push_back(std::list<value_type>());
+        }
+        hash_size = n;
     }
 
-    return (hash & 0x7FFFFFFF);
-}
+    ~hash_map() {}
 
-unsigned SDBMHash(const char *str)
-{
-    unsigned hash = 0;
+    bool find(const key_type& key, mapped_type& val) const {
+        size_t hv = hashed_key(key);
+        const std::list<value_type>& l = buckets_[hv];
 
-    while (*str) {
-        hash = (*str++) + (hash << 6) + (hash << 16) - hash;
+        for (auto &&elm: l) {
+            if (elm.first == key) {
+                val = elm.second;
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    return (hash & 0x7FFFFFFF);
-}
-
-unsigned RSHash(const char *str)
-{
-    unsigned b = 378551;
-    unsigned a = 63689;
-    unsigned hash = 0;
-
-    while (*str) {
-        hash = hash * a + (*str++);
-        a *= b;
-    }
-
-    return (hash & 0x7FFFFFFF);
-}
-
-unsigned JSHash(const char *str)
-{
-    unsigned hash = 1315423911;
-
-    while (*str) {
-        hash ^= ((hash << 5) + (*str++) + (hash >> 2));
-    }
-
-    return (hash & 0x7FFFFFFF);
-}
-
-unsigned BKDRHash(const char *str)
-{
-    unsigned seed = 131;
-    unsigned hash = 0;
-
-    while (*str) {
-        hash = hash * seed + (*str++);
-    }
-
-    return (hash & 0x7FFFFFFF);
-}
-
-
-unsigned APHash(const char *str)
-{
-    unsigned hash = 0;
-    int i;
-
-    for (i = 0; *str; i++) {
-        if ((i & 1) == 0) {
-            hash ^= ((hash << 7) ^ (*str++) ^ (hash >> 3));
+    mapped_type find(const key_type& key) const {
+        mapped_type val;
+        bool done = find(key, val);
+        if (done) {
+            return val;
         } else {
-            hash ^= (~((hash << 11) ^ (*str++) ^ (hash >> 5)));
+            throw std::out_of_range("key not found in talbe");
         }
     }
-}
 
-
-unsigned hash(const string &s)
-{
-    return (BKDRHash(s.c_str()) % M);
-}
-
-int main()
-{
-    list< Slot<int> > hashTable[M];
-    vector<string> keys;
-
-    REP(i, keys.size()) {
-        hashTable[hash(keys[i])].push_back(Slot<int>(1));
+    void insert(const key_type& key, T val) {
+        size_t hv = hashed_key(key);
+        key_type key_copy(key);
+        buckets_[hv].push_back(std::make_pair(key_copy, val));
     }
+
+    void remove(const key_type& key) {
+        size_t hv = hashed_key(key);
+
+        auto&& itr = begin(buckets_[hv]);
+
+        while (itr->first != key) {
+            itr++;
+        }
+
+        buckets_[hv].erase(itr);
+    }
+
+    reference operator[](const key_type& key) {
+        return (reference(*this, key));
+    }
+
+    const reference operator[](const key_type& key) const {
+        return find(key);
+    }
+
+private:
+    std::vector<std::list<value_type> > buckets_;
+    int hash_size;
+
+    inline size_t hashed_key(const key_type& key) const {
+        return std::hash<Key>()(key) % hash_size;
+    }
+};
+
+
+int main(void)
+{
+    hash_map<std::string, int> M;
+
+    M.insert("C++", 1);
+    std::cout << M["C++"]() << std::endl;
+    M["C++"] = 2;
+    std::cout << M["C++"]() << std::endl;
+
     return 0;
 }
