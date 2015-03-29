@@ -1,9 +1,7 @@
-#include <iostream>
 #include <vector>
+#include "utils/common.h"
 
-using namespace std;
-
-void bubble_sort(vector<int> &a)
+void bubble_sort(std::vector<int> &a)
 {
     int n = a.size();
     bool swapped;
@@ -13,7 +11,7 @@ void bubble_sort(vector<int> &a)
         n -= 1;
         for (int i = 0; i < n; i++) {
             if (a[i] > a[i+1]) {
-                swap(a[i], a[i+1]);
+                std::swap(a[i], a[i+1]);
                 swapped = true;
             }
         }
@@ -22,12 +20,8 @@ void bubble_sort(vector<int> &a)
 
 int main()
 {
-    vector<int> a { 6, 5, 4, 3, 2, 1 };
+    std::vector<int> a { 6, 5, 4, 3, 2, 1 };
     bubble_sort(a);
-    for (auto elem: a) {
-        std::cout << elem << ' ';
-    }
-    std::cout << std::endl;
-
+    print_container(a);
     return 0;
 }

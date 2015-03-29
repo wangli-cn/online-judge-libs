@@ -1,5 +1,5 @@
-#include <iostream>
 #include <vector>
+#include "utils/common.h"
 
 using namespace std;
 
@@ -24,5 +24,8 @@ vector<int> find_intersection(vector<int> &a, vector<int> &b)
 
 int main(void)
 {
+    vector<int> a {1,2,3,4,5};
+
+    print_container(a);
     return 0;
 }
