@@ -1,12 +1,18 @@
 #include <iostream>
+#include <random>
 #include <vector>
-#include <cmath>
 
-using namespace std;
-
-int rand_dist(vector<int> den)
+int rand()
 {
-    vector<int> dist(den.size());
+    static std::random_device rd;
+    static std::mt19937 mt(rd());
+    static std::uniform_int_distribution<> dist(1, 100);
+    return dist(mt);
+}
+
+int rand_dist(std::vector<int> den)
+{
+    std::vector<int> dist(den.size());
     int n = den.size();
 
     dist[0] = den[0];
@@ -24,7 +30,7 @@ int rand_dist(vector<int> den)
 
 int main()
 {
-    vector<int> den {1,2,3,4,5};
+    std::vector<int> den {1,2,3,4,5};
     std::cout << rand_dist(den) << std::endl;
     return 0;
 }

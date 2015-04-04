@@ -1,11 +1,12 @@
 #include <iostream>
-#include <cstdlib>
-
-using namespace std;
+#include <random>
 
 int rand7()
 {
-    return 1+(rand() % 7);
+    static std::random_device rd;
+    static std::mt19937 mt(rd());
+    static std::uniform_int_distribution<> dist(1, 7);
+    return dist(mt);
 }
 
 int rand10()
@@ -49,14 +50,14 @@ int optimized_rand10()
 int main()
 {
     for (int i = 0; i < 20; i++) {
-        cout << rand10() << endl;
+        std::cout << rand10() << " "
     }
-
-    cout << endl;
+    std::cout << std::endl;
 
     for (int i = 0; i < 20; i++) {
-        cout << optimized_rand10() << endl;
+        std::cout << optimized_rand10() << " "
     }
+    std::cout << std::endl;
 
     return 0;
 }
