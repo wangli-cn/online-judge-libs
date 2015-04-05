@@ -1,5 +1,15 @@
+#ifndef __COMMON
+#define __COMMON
+
 #include <iostream>
 #include <string>
+
+#define REP(i, n) for(int i = 0; i < (int)n; ++i)
+#define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
+#define EPS 1e-8
+
+const int INF = std::numeric_limits<int>::max();
+
 
 template<class T>
 void print_container(T&& c, std::string sep = " ")
@@ -9,3 +19,5 @@ void print_container(T&& c, std::string sep = " ")
     }
     std::cout << std::endl;
 }
+
+#endif

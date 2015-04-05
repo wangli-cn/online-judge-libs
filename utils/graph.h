@@ -1,20 +1,25 @@
+#ifndef __GRAPH
+#define __GRAPH
+
 #include <vector>
+#include <limits>
+#include "utils/common.h"
 
-using namespace std;
+using Weight = int;
 
-const int INF = std::numeric_limits<int>::max();
-typedef int Weight;
-
-struct Edge
+class Edge
 {
+public:
     int src, dst;
     Weight weight;
-    Edge(int src, int dst, Weight weight = 0)
+
+    Edge() = delete;
+    explicit Edge(int src, int dst, Weight weight = 0)
         :src(src), dst(dst), weight(weight) {}
 };
 
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
+using Edges = std::vector<Edge>;
+using Graph = std::vector<Edges>;
 
 bool operator<(const Edge &e, const Edge &f)
 {
@@ -22,5 +27,4 @@ bool operator<(const Edge &e, const Edge &f)
            (e.src != f.src) ? e.src > f.src : e.dst > f.dst;
 }
 
-#define REP(i, n) for(int i = 0; i < (int)n; ++i)
-#define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
+#endif
