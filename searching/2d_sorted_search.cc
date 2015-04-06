@@ -1,16 +1,13 @@
 #include <iostream>
 #include <algorithm>
 
-using namespace std;
-
-
-pair<int,int> find(int matrix[5][5], int M, int N, int value)
+std::pair<int,int> find(int matrix[5][5], int M, int N, int value)
 {
     int r = 0, c = N-1;
 
     while (r < M && c >= 0) {
         if (matrix[r][c] == value) {
-            return pair<int, int>(r, c);
+            return std::make_pair(r, c);
         } else if (matrix[r][c] > value) {
             c--;
         } else {
@@ -18,7 +15,7 @@ pair<int,int> find(int matrix[5][5], int M, int N, int value)
         }
     }
 
-    return pair<int,int>(-1, -1);
+    return std::make_pair(-1, -1);
 }
 
 int main()
@@ -28,8 +25,8 @@ int main()
                     {11,12,13,14,15},
                     {16,17,18,19,20},
                     {21,22,23,24,25}};
-    pair<int,int> res = find(a, 5, 5, 18);
-    cout << res.first << " " << res.second << endl;
 
+    auto&& res =  find(a, 5, 5, 18);
+    std::cout << res.first << " " << res.second << std::endl;
     return 0;
 }
