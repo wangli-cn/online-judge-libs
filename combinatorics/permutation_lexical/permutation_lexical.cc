@@ -1,21 +1,19 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
 //can deal with the repetition in the string
-void lexical_permutation(string &s, int pos)
+void lexical_permutation(std::string &s, int pos)
 {
     int n = s.length();
     if (pos == n-1) {
-        cout << s << endl;
+        std::cout << s << std::endl;
         return;
     }
 
     lexical_permutation(s, pos+1);
     for (int i = pos+1; i < n; ++i) {
         if (s[pos] != s[i]) {
-            swap(s[pos], s[i]);
+            std::swap(s[pos], s[i]);
             lexical_permutation(s, pos+1);
         }
     }
@@ -28,8 +26,9 @@ void lexical_permutation(string &s, int pos)
 
 int main(void)
 {
-    string s;
-    cin >> s;
+    std::string s;
+    std::cin >> s;
+
     lexical_permutation(s, 0);
 
     return 0;
