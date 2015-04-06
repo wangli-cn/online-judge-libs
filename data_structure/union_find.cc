@@ -1,21 +1,23 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
-
-struct UnionFind
+class UnionFind
 {
-    vector<int> data;
-    UnionFind(int size) :data(size, -1) {}
+public:
+    std::vector<int> data;
+
+    UnionFind() = delete;
+    explicit UnionFind(int size) :data(size, -1) {}
+
     bool unionSet(int x, int y) {
         x = root(x); y = root(y);
         if (x != y) {
-            if (data[y] < data[x]) swap(x, y);
+            if (data[y] < data[x]) std::swap(x, y);
             data[x] += data[y]; data[y] = x;
         }
         return x != y;
     }
-    
+
     bool findSet(int x, int y) {
         return root(x) == root(y);
     }
@@ -36,7 +38,7 @@ int main(void)
     uf.unionSet(3, 4);
     uf.unionSet(1, 5);
 
-    cout << uf.size(1) << endl;
-    cout << uf.root(5) << endl;
+    std::cout << uf.size(1) << std::endl;
+    std::cout << uf.root(5) << std::endl;
     return 0;
 }
