@@ -14,18 +14,20 @@
 
 
 #include <iostream>
+#include <string>
 
-using namespace std;
-
-struct Result
+class Result
 {
-    Result(int p) :p(p), valid(true) {}
+public:
+    Result() = delete;
+    explicit Result(int p) :p(p), valid(true) {}
+
     int p;
     bool valid;
 };
 
 
-Result parse_spaces(const string &s, int p)
+Result parse_spaces(const std::string &s, int p)
 {
     Result r(p);
     r.valid = false;
@@ -38,7 +40,7 @@ Result parse_spaces(const string &s, int p)
     return r;
 }
 
-Result parse_dot_or_exp(const string &s, int p)
+Result parse_dot_or_exp(const std::string &s, int p)
 {
     Result r(p);
     if (s[r.p] == 'e' || s[r.p] == '.') {
@@ -52,7 +54,7 @@ Result parse_dot_or_exp(const string &s, int p)
 }
 
 // (-|+)?
-Result parse_sign(const string &s, int p)
+Result parse_sign(const std::string &s, int p)
 {
     Result r(p);
 
@@ -67,7 +69,7 @@ Result parse_sign(const string &s, int p)
 }
 
 
-Result parse_integer(const string &s, int p)
+Result parse_integer(const std::string &s, int p)
 {
     Result r(p);
     r.valid = false;
@@ -80,9 +82,9 @@ Result parse_integer(const string &s, int p)
     return r;
 }
 
-Result parse_number(const string &s, int p)
+Result parse_number(const std::string &s, int p)
 {
-    Result final(p);
+    Result rr(p);
 
     Result r = parse_spaces(s, p);
 
@@ -93,22 +95,22 @@ Result parse_number(const string &s, int p)
         Result r_ = parse_dot_or_exp(s, r.p);
 
         if (r_.valid) {
-            final = parse_integer(s, r_.p);
+            rr = parse_integer(s, r_.p);
         } else {
-            final = r;
+            rr = r;
         }
     } else {
-        final = r;
+        rr = r;
     }
 
-    return final;
+    return rr;
 }
 
 
 int main()
 {
-    string input("    +2e10");
+    std::string input("    +2e10");
     Result r = parse_number(input, 0);
-    cout << r.valid << endl;
+    std::cout << r.valid << std::endl;
     return 0;
 }
