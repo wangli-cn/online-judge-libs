@@ -1,10 +1,8 @@
 #include <iostream>
 #include <vector>
-#include "graphtool.h"
+#include "utils/graph.h"
 
-using namespace std;
-
-typedef pair<Weight, int> Result;
+using Result = std::pair<Weight, int>;
 
 Result visit(int p, int v, const Graph &g)
 {
@@ -14,6 +12,7 @@ Result visit(int p, int v, const Graph &g)
         t.first += e->weight;
         if (r.first < t.first) r = t;
     }
+
     return r;
 }
 
@@ -24,7 +23,7 @@ Weight tree_diameter(const Graph &g)
     return t.first;
 }
 
-int main(void)
+int main()
 {
     return 0;
 }
