@@ -20,6 +20,8 @@ public:
 
 using Edges = std::vector<Edge>;
 using Graph = std::vector<Edges>;
+using Array = std::vector<Weight>;
+using Matrix = std::vector<Array>;
 
 bool operator<(const Edge &e, const Edge &f)
 {

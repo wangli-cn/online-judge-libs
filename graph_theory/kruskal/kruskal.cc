@@ -4,21 +4,20 @@
 #include <iterator>
 #include <limits>
 #include <algorithm>
-#include "graphtool.h"
+#include "utils/graph.h"
 
-using namespace std;
 
-#define REP(i,n) for(int i = 0; i < (int)n; ++i)
-#define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-
-struct UnionFind
+class UnionFind
 {
-    vector<int> data;
+public:
+    std::vector<int> data;
+
     UnionFind(int size) :data(size, -1) {}
+
     bool unionSet(int x, int y) {
         x = root(x); y = root(y);
         if (x != y) {
-            if (data[y] < data[x]) swap(x, y);
+            if (data[y] < data[x]) std::swap(x, y);
             data[x] += data[y]; data[y] = x;
         }
         return x != y;
@@ -37,11 +36,13 @@ struct UnionFind
     }
 };
 
-pair<Weight, Edges> Kruskal(const Graph &g)
+
+std::pair<Weight, Edges> Kruskal(const Graph &g)
 {
     int n = g.size();
     UnionFind uf(n);
-    priority_queue<Edge> Q;
+    std::priority_queue<Edge> Q;
+
     REP(u, n) FOR(e, g[u]) if (u < e->dst) Q.push(*e);
 
     Weight total = 0;
@@ -54,10 +55,32 @@ pair<Weight, Edges> Kruskal(const Graph &g)
         }
     }
 
-    return pair<Weight, Edges>(total, F);
+    return std::move(std::pair<Weight, Edges>(total, F));
 }
+
 
 int main()
 {
+    int n, m;
+
+    while (std::cin >> n >> m) {
+        if (n == 0 && m == 0) break;
+
+        Graph g;
+        g.resize(n);
+        for (int i = 0; i < m; i++) {
+            int a, b, w;
+            std::cin >> a >> b >> w;
+            g[a-1].push_back(Edge(a-1, b-1, w));
+        }
+
+        auto ans = Kruskal(g);
+        if (ans.second.size() != (n-1)) {
+            std::cout << -1 << std::endl;
+        } else {
+            std::cout << ans.first << std::endl;
+        }
+    }
+
     return 0;
 }
