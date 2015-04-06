@@ -8,21 +8,21 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include "utils/common.h"
 
-using namespace std;
+using VS = std::vector<std::string>;
+using VVS = std::vector<std::vector<std::string>>;
 
-typedef vector< vector<string> > VVS;
-
-#define REP(i, n) for(int i = 0; i < (int)n; ++i)
-#define FOR(i, c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-
-struct Word
+class Word
 {
-    Word(const string &t) :s(t) {
-        sort(s.begin(), s.end());
+public:
+    Word() = delete;
+
+    explicit Word(const std::string &t) :s(t) {
+        std::sort(s.begin(), s.end());
     }
 
-    string s;
+    std::string s;
 };
 
 bool operator<(const Word &a, const Word &b)
@@ -30,9 +30,9 @@ bool operator<(const Word &a, const Word &b)
     return a.s < b.s;
 }
 
-vector< vector<string> > anagram(const vector<string> &a)
+std::vector<std::vector<std::string>> anagram(const std::vector<std::string> &a)
 {
-    vector<Word> words;
+    std::vector<Word> words;
 
     int n = a.size();
     REP(i, n) {
@@ -42,8 +42,8 @@ vector< vector<string> > anagram(const vector<string> &a)
     sort(words.begin(), words.end());
 
     n = words.size();
-    vector< vector<string> > res;
-    vector<string> tmp;
+    VVS res;
+    VS tmp;
 
     tmp.push_back(words[0].s);
     for (int i = 1; i < n; i++) {
@@ -65,17 +65,22 @@ vector< vector<string> > anagram(const vector<string> &a)
 
 int main(void)
 {
-    vector<string> words {string("star"), string("arts"), string("car"), string("arc"), string("go") };
+    VS words { std::string("star"),
+               std::string("arts"),
+               std::string("car"),
+               std::string("arc"),
+               std::string("go") };
 
-    VVS t = anagram(words);
+    auto&& t = anagram(words);
+
     FOR(i, t) {
-        cout << "[";
+        std::cout << "[";
         FOR(j, *i) {
-            cout << *j << " ";
+            std::cout << *j << " ";
         }
-        cout << "] ";
+        std::cout << "] ";
     }
-    cout << endl;
+    std::cout << std::endl;
 
     return 0;
 }
