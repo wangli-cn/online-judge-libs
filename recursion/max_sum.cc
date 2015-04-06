@@ -7,10 +7,9 @@
 //============================================================================
 
 #include <iostream>
+#include <vector>
 
-using namespace std;
-
-int max_sum(int a[], int n, int &start, int &end)
+int max_sum(const std::vector<int> &a, int n, int &start, int &end)
 {
     int sum = -99999999;
     int b = 0;
@@ -35,10 +34,9 @@ int max_sum(int a[], int n, int &start, int &end)
 
 int main()
 {
-    int a[9] = {-2,1,-3,4,-1,2,1,-5,4};
+    std::vector<int> a {-2,1,-3,4,-1,2,1,-5,4};
     int start = 0, end = 0;
 
-    cout << max_sum(a, 9, start, end) << endl;
-
+    std::cout << max_sum(a, 9, start, end) << std::endl;
     return 0;
 }
