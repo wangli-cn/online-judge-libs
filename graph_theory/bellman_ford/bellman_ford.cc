@@ -2,18 +2,12 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
-#include "graphtool.h"
+#include "utils/graph.h"
 
-using namespace std;
-
-#define REP(i, n) for(int i = 0; i < (int)n; ++i)
-#define FOR(i, c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-
-
-bool BellmanFord(const Graph &g, int s, vector<Weight> &dist, vector<int> &prev)
+bool BellmanFord(const Graph &g, int s, std::vector<Weight> &dist, std::vector<int> &prev)
 {
     const int n = g.size();
-    dist.assign(n, INF + INF); dist[s] = 0;
+    dist.assign(n, INF); dist[s] = 0;
     prev.assign(n, -1);
     bool negative_cycle = false;
 
@@ -30,9 +24,9 @@ bool BellmanFord(const Graph &g, int s, vector<Weight> &dist, vector<int> &prev)
     return !negative_cycle;
 }
 
-vector<int> buildPath(const vector<int> &prev, int t)
+std::vector<int> buildPath(const std::vector<int> &prev, int t)
 {
-    vector<int> path;
+    std::vector<int> path;
     for (int u = t; u >= 0; u = prev[u]) {
         path.push_back(u);
     }
@@ -42,8 +36,8 @@ vector<int> buildPath(const vector<int> &prev, int t)
 
 int main()
 {
-    vector<Weight> dist;
-    vector<int> prev;
+    std::vector<Weight> dist;
+    std::vector<int> prev;
     Graph g;
 
     g.resize(3);
@@ -52,9 +46,9 @@ int main()
     g[2].push_back(Edge(2, 0, 10000));
 
     BellmanFord(g, 0, dist, prev);
-    vector<int> path = buildPath(prev, 2);
+    std::vector<int> path = buildPath(prev, 2);
 
-    cout << dist[2] << endl;
-    copy(path.begin(), path.end(), ostream_iterator<int>(cout, " "));
+    std::cout << dist[2] << std::endl;
+    std::copy(path.begin(), path.end(), std::ostream_iterator<int>(std::cout, " "));
     return 0;
 }
