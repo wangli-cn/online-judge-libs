@@ -1,7 +1,5 @@
 #include <iostream>
 
-using namespace std;
-
 int integer_partition(int n, int m)
 {
     if (n == 1 || m == 1) return 1;
@@ -14,7 +12,7 @@ int main(void)
 {
     int n;
 
-    cin >> n;
-    cout << integer_partition(n, n) << endl;
+    std::cin >> n;
+    std::cout << integer_partition(n, n) << std::endl;
     return 0;
 }
