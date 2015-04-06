@@ -3,8 +3,7 @@
 
 using namespace std;
 
-vector<int> StableMarriage(const vector< vector<int> > &orderM,
-                           const vector< vector<int> > &orderW)
+vector<int> StableMarriage(const vector< vector<int> > &orderM, const vector< vector<int> > &orderW)
 {
     const int N = orderM.size();
     vector< vector<int> > preferW(N, vector<int>(N+1, N));
