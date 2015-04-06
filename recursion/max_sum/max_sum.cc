@@ -8,12 +8,17 @@
 
 #include <iostream>
 #include <vector>
+#include <limits>
 
-int max_sum(const std::vector<int> &a, int n, int &start, int &end)
+using Range = std::pair<int, int>;
+
+std::pair<int, Range>  max_sum(const std::vector<int> &a, int n)
 {
-    int sum = -99999999;
+    int sum = std::numeric_limits<int>::min();
     int b = 0;
     int s = 0;
+
+    int start = 0, end = 0;
     for (int i = 0; i < n; i++) {
         b += a[i];
 
@@ -29,14 +34,14 @@ int max_sum(const std::vector<int> &a, int n, int &start, int &end)
         }
     }
 
-    return sum;
+    return std::make_pair(sum, std::make_pair(start, end));
 }
 
 int main()
 {
     std::vector<int> a {-2,1,-3,4,-1,2,1,-5,4};
-    int start = 0, end = 0;
 
-    std::cout << max_sum(a, 9, start, end) << std::endl;
+    auto&& res = max_sum(a, 9);
+    std::cout << res.first << std::endl;
     return 0;
 }
