@@ -1,29 +1,35 @@
 #include <iostream>
-#include <cstdlib>
-#include <cmath>
+#include <random>
 
-using namespace std;
-
-typedef int Key;
-typedef int Value;
-typedef int Result;
-
-struct Treap
+int rand()
 {
+    static std::random_device rd;
+    static std::mt19937 mt(rd());
+    static std::uniform_int_distribution<> dist(1, 7);
+    return dist(mt);
+}
+
+using Key = int;
+using Value = int;
+using Result = int;
+
+class Treap
+{
+public:
     Key key;
     Value value;
     int p;
     bool cached;
     Result cache;
-    Treap *ch[2]; //LEFT = ch[0], RIGHT = ch[1]
-    Treap(const Key &key, const Value &value)
-        :key(key), value(value), p(rand()), cached(0) 
+    Treap *ch[2];
+
+    explicit Treap(const Key &key, const Value &value) :key(key), value(value), p(rand()), cached(0)
     {
-        ch[0] = ch[1] = 0;
+        ch[0] = ch[1] = nullptr;
     }
 };
 
-Treap *rotate(Treap *t, int b) 
+Treap *rotate(Treap *t, int b)
 {
     Treap *s = t->ch[1-b]; t->ch[1-b] = s->ch[b]; s->ch[b] = t;
     s->cached = t->cached = false;
@@ -49,7 +55,7 @@ Treap *insert(Treap *t, const Key &key, const Value &value)
 
 Treap *erase(Treap *t, const Key &key)
 {
-    if (!t) return NULL;
+    if (!t) return nullptr;
     if (key == t->key) {
         if (!t->ch[0] && !t->ch[1]) return NULL;
         else if (!t->ch[0]) t = rotate(t, 0);
@@ -65,7 +71,7 @@ Treap *erase(Treap *t, const Key &key)
     return t;
 }
 
-Result eval(Treap *t) 
+Result eval(Treap *t)
 {
     if (!t) return 0;
     if (!t->cached)
