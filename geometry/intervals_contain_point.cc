@@ -1,12 +1,12 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
-#include "utils/interval_tree.h"
+#include "utils/segment_tree.h"
 
 int main(void)
 {
     std::vector<int> pos {0, 8, 10, 11, 1000, 1006, 1009};
-    IntervalTree<int> T(pos);
+    SegmentTree<int> T(pos);
 
     T.insert(Interval(8, 10), 1);
     T.insert(Interval(8, 1000), 2);
