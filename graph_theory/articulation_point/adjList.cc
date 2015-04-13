@@ -4,21 +4,7 @@
 #include <stack>
 #include <sstream>
 #include <algorithm>
-
-using namespace std;
-
-#define REP(i,n) for(int i = 0; i < (int)n; ++i)
-#define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-
-struct Edge 
-{
-    int src, dst;
-    Edge(int src, int dst) 
-        :src(src), dst(dst) {}
-};
-
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
+#include "utils/graph.h"
 
 struct UndirectionalCompare {
     bool operator() (const Edge &e, const Edge &f) const {
@@ -30,7 +16,7 @@ struct UndirectionalCompare {
 
 typedef set<Edge, UndirectionalCompare> Edgeset;
 
-void visit(const Graph &g, int v, int u, 
+void visit(const Graph &g, int v, int u,
            vector<int> &art, vector<Edgeset> &bcomp,
            stack<Edge> &S, vector<int> &num, vector<int> &low, int &time)
 {
@@ -50,14 +36,14 @@ void visit(const Graph &g, int v, int u,
                     bcomp.back().insert(f);
                     if (f.src == v && f.dst == w) break;
                 }
-            } 
+            }
         } else {
             low[v] = min(low[v], num[w]);
         }
     }
 }
 
-void articulationPoint(const Graph &g, vector<int> &art, vector<Edgeset> &bcomp) 
+void articulationPoint(const Graph &g, vector<int> &art, vector<Edgeset> &bcomp)
 {
     const int n = g.size();
     vector<int> low(n), num(n);

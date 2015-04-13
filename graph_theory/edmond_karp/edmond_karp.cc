@@ -3,12 +3,8 @@
 #include <queue>
 #include <algorithm>
 #include <iterator>
-#include "graphtool.h"
+#include "utils/graph.h"
 
-using namespace std;
-
-typedef vector<Weight> Array;
-typedef vector<Array> Matrix;
 #define RESIDUE(s,t) (capacity[s][t] - flow[s][t])
 
 Weight EdmondKarp(const Graph &g, int s, int t)
@@ -19,8 +15,8 @@ Weight EdmondKarp(const Graph &g, int s, int t)
 
     Weight total = 0;
     while (1) {
-        queue<int> Q; Q.push(s);
-        vector<int> prev(n, -1); prev[s] = s;
+        std::queue<int> Q; Q.push(s);
+        std::vector<int> prev(n, -1); prev[s] = s;
         while (!Q.empty() && prev[t] < 0) {
             int u = Q.front(); Q.pop();
             FOR(e, g[u]) if (prev[e->dst] < 0 && RESIDUE(u, e->dst)) {
@@ -31,7 +27,7 @@ Weight EdmondKarp(const Graph &g, int s, int t)
         if (prev[t] < 0) return total;
         Weight inc = INF;
         for (int j = t; prev[j] != j; j = prev[j])
-            inc = min(inc, RESIDUE(prev[j], j));
+            inc = std::min(inc, RESIDUE(prev[j], j));
         for (int j = t; prev[j] != j; j = prev[j])
             flow[prev[j]][j] += inc, flow[j][prev[j]] -= inc;
         total += inc;
@@ -43,18 +39,18 @@ int main()
     int N, M;
     int src, dst;
 
-    while (cin >> N && N) {
+    while (std::cin >> N && N) {
         Graph g;
         g.resize(N);
 
-        cin >> src >> dst >> M;
+        std::cin >> src >> dst >> M;
         REP(i, M) {
             int x, y, c;
-            cin >> x >> y >> c;
+            std::cin >> x >> y >> c;
             g[x].push_back(Edge(x, y, c));
         }
 
-        cout << EdmondKarp(g, src, dst) << endl;
+        std::cout << EdmondKarp(g, src, dst) << std::endl;
     }
     return 0;
 }

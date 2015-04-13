@@ -1,21 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include "utils/graph.h"
 
-using namespace std;
-
-#define FOR(i,c) for(__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-#define REP(i,n) for(int i = 0; i < (int)n; ++i)
-
-struct Edge 
-{
-    int src, dst;
-    Edge(int src, int dst) 
-        :src(src), dst(dst) {}
-};
-
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
 
 void visit(const Graph &g, int v, vector< vector<int> > &scc,
            stack<int> &S, vector<bool> &inS,
@@ -23,13 +10,14 @@ void visit(const Graph &g, int v, vector< vector<int> > &scc,
 {
     low[v] = num[v] = ++time;
     S.push(v); inS[v] = true;
+
     FOR(e, g[v]) {
         int w = e->dst;
         if (num[w] == 0) {
             visit(g, w, scc, S, inS, low, num, time);
-            low[v] = min(low[v], low[w]);
+            low[v] = std::min(low[v], low[w]);
         } else if (inS[w]) {
-            low[v] = min(low[v], num[w]);
+            low[v] = std::min(low[v], num[w]);
         }
     }
 
@@ -46,12 +34,16 @@ void visit(const Graph &g, int v, vector< vector<int> > &scc,
 void stronglyConnectedComponents(const Graph &g, vector< vector<int> > &scc)
 {
     const int n = g.size();
+
     vector<int> num(n), low(n);
     stack<int> S;
     vector<bool> inS(n);
+
     int time = 0;
-    REP(u, n) if (num[u] == 0)
+
+    REP(u, n) if (num[u] == 0) {
         visit(g, u, scc, S, inS, low, num, time);
+    }
 }
 
 int main(void)
