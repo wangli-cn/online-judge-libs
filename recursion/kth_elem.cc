@@ -1,11 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <limits>
 
-#define INF 99999999
+const int INF = std::numeric_limits<int>::max();
 
-using namespace std;
-
-int select(vector<int> &a, int k, int l, int r)
+int select(std::vector<int> &a, int k, int l, int r)
 {
     if (l > r) return INF;
 
@@ -16,9 +15,8 @@ int select(vector<int> &a, int k, int l, int r)
         while (a[++i] < a[p]);
         while (a[--j] > a[p]);
         if (i >= j) break;
-        swap(a[i], a[j]);
+        std::swap(a[i], a[j]);
     }
-
 
     int t = i-l+1;
     if (k == t) return a[i];
@@ -28,7 +26,7 @@ int select(vector<int> &a, int k, int l, int r)
 
 int main(void)
 {
-    vector<int> vec {1000, 999, 1001, 7, 3, 2, 1, 10000};
-    cout << select(vec, 1, 0, 7) << endl;
+    std::vector<int> vec {1000, 999, 1001, 7, 3, 2, 1, 10000};
+    std::cout << select(vec, 1, 0, 7) << std::endl;
     return 0;
 }

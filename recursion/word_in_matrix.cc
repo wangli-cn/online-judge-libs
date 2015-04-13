@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
+using VVB = std::vector<std::vector<bool>>;
 
-bool has_word_helper(const char *A[], int m, int n, const char *word, int i, int j, vector<vector<bool> > &visited)
+bool has_word_helper(const char *A[], int m, int n, const char *word, int i, int j, VVB &visited)
 {
     if (word == nullptr) return true;
     if (*word == '\0') return true;
@@ -30,7 +30,7 @@ bool has_word(const char *A[], int m, int n, const char *word)
 {
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
-            vector< vector<bool> > visited(m, vector<bool>(n, false));
+            VVB visited(m, std::vector<bool>(n, false));
             if (has_word_helper(A, m, n, word, i, j, visited)) {
                 return true;
             }
@@ -43,5 +43,6 @@ bool has_word(const char *A[], int m, int n, const char *word)
 int main()
 {
     const char *matrix[] = {"woc", "dba", "atc"};
-    cout << has_word(matrix, 3, 3, "cow") << endl;
+    std::cout << std::boolalpha << has_word(matrix, 3, 3, "cow") << std::endl;
+    return 0;
 }
