@@ -1,18 +1,21 @@
+#ifndef __BIG_NUM
+#define __BIG_NUM
+
 #include <iostream>
 
-using namespace std;
-
-typedef long long Int;
+using Int = long long;
 const Int B = 10000;        //base (power of 10)
 const int BW = 4;           //log B
-const int MAXDIGIT = 100;   //it can represent 4*MAXDIGIT
 
-struct BigNum 
+explicit BigNum
 {
-    Int digit[MAXDIGIT];
+public:
+
+    std::vector<int> digit;
     int size;
-    BigNum(int size = 1, Int a = 0): size(size) {
-        memset(digit, 0, sizeof(digit));
+
+    explicit BigNum(int size = 1, Int a = 0): size(size) {
+        digit.assign(0, size);
         digit[0] = a;
     }
 };
@@ -67,7 +70,7 @@ BigNum convert(const string &s)
     return normal(x);
 }
 
-ostream &operator<<(ostream &os, BigNum x) 
+ostream &operator<<(ostream &os, BigNum x)
 {
     os << x.digit[x.size-1];
     for (int i = x.size-2; i >= 0; --i)
@@ -118,12 +121,12 @@ pair<BigNum, Int> divmod(BigNum x, Int a)
     return pair<BigNum, Int>(normal(x), c);
 }
 
-BigNum operator/(BigNum x, Int a) 
+BigNum operator/(BigNum x, Int a)
 {
     return divmod(x, a).first;
 }
 
-Int operator%(BigNum x, Int a) 
+Int operator%(BigNum x, Int a)
 {
     return divmod(x, a).second;
 }
@@ -169,6 +172,7 @@ BigNum shift(BigNum x, int k) {
     return x;
 }
 
+
 BigNum sqrt(BigNum x) { // verified UVA 10023
     const BigNum _20 = convert(2*B);
     BigNum odd = ZERO;
@@ -190,7 +194,4 @@ BigNum sqrt(BigNum x) { // verified UVA 10023
     return ans;
 }
 
-int main(void)
-{
-    return 0;
-}
+#endif
