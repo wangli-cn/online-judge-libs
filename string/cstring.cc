@@ -55,6 +55,20 @@ char *my_strcpy(char *dst, const char *src)
     return ptr;
 }
 
+
+void reverse_str(char *buf, int s, int e)
+{
+    char t;
+
+    if (s >= e) return;
+
+    t = *(buf + s);
+    *(buf + s) = *(buf + e);
+    *(buf + e) = t;
+
+    reverse_str(buf, ++s, --e);
+}
+
 int main()
 {
     const char a[] = "default";

@@ -6,10 +6,6 @@
 #include <cstdio>
 #include <cstring>
 
-#define REP(i,n) for (int i = 0; i < (int)n; ++i)
-#define FOR(i,c) for (__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-
-using namespace std;
 
 vector<string> splitAll(string s, string t)
 {
@@ -55,8 +51,26 @@ string replace(string s, string f, string t)
     return r+s;
 }
 
+
+std::string ltrim(std::string s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+    return s;
+}
+
+// trim from end
+std::string rtrim(std::string s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+    return s;
+}
+
+// trim from both ends
+std::string trim(std::string s) {
+    return ltrim(rtrim(s));
+}
+
+
 int main(void)
 {
-     
+
     return 0;
 }

@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
-string expand_around_center(string &s, int c1, int c2)
+std::string expand_around_center(std::string &s, int c1, int c2)
 {
     int l = c1, r = c2;
     int n = s.length();
@@ -13,23 +11,31 @@ string expand_around_center(string &s, int c1, int c2)
     return s.substr(l+1, r-l-1);
 }
 
-string longest_palindrom(string &s)
+std::string longest_palindrom(std::string &s)
 {
     int n = s.length();
     if (n == 0) return "";
 
-    string longest = s.substr(0, 1);
+    std::string longest = s.substr(0, 1);
     for (int i = 0; i < n-1; i++) {
-        string p1 = expand_around_center(s, i, i);
+        std::string p1 = expand_around_center(s, i, i);
         if (p1.length() > longest.length()) {
             longest = p1;
         }
 
-        string p2 = expand_around_center(s, i, i+1);
+        std::string p2 = expand_around_center(s, i, i+1);
         if (p2.length() > longest.length()) {
             longest = p2;
         }
     }
 
-    return longest
+    return longest;
+}
+
+int main()
+{
+    std::string s("dddabccbaxxxx");
+
+    std::cout << longest_palindrom(s) << std::endl;
+    return 0;
 }
