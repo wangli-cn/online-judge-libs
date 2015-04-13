@@ -3,8 +3,6 @@
 #include <string>
 #include <sstream>
 
-using namespace std;
-
 int priority(char op)
 {
     int p;
@@ -19,10 +17,10 @@ int priority(char op)
     return p;
 }
 
-string infix2postfix(const string &s)
+std::string infix2postfix(const std::string &s)
 {
-    stack<char> S;
-    stringstream strstr;
+    std::stack<char> S;
+    std::stringstream strstr;
 
     int n = s.length();
     for (int i = 0; i < n; i++) {
@@ -56,13 +54,13 @@ string infix2postfix(const string &s)
         S.pop();
     }
 
-    string t;
+    std::string t;
     strstr >> t;
     return t;
 }
 
 int main()
 {
-    cout << infix2postfix(string("(a+b)*(c+d)")) << endl;
+    std::cout << infix2postfix(std::string("(a+b)*(c+d)")) << std::endl;
     return 0;
 }

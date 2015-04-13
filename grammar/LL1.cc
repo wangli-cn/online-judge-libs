@@ -1,20 +1,19 @@
 #include <iostream>
-
-using namespace std;
+#include <string>
 
 //equation := equation + factor | factor
 //factor   := factor   * term   | term
 //term     := (equation) | Number
 
-typedef pair<int, int> Result;
+using Result = std::pair<int, int>;
 #define value first
 #define p second
 
-Result equation(const string &s, int p = 0);
-Result factor(const string &s, int p = 0);
-Result term(const string &s, int p = 0);
+Result equation(const std::string &s, int p = 0);
+Result factor(const std::string &s, int p = 0);
+Result term(const std::string &s, int p = 0);
 
-Result equation(const string &s, int p) 
+Result equation(const std::string &s, int p)
 {
     Result r = factor(s, p);
     while (s[r.p] == '+') {
@@ -25,7 +24,7 @@ Result equation(const string &s, int p)
     return r;
 }
 
-Result factor(const string &s, int p)
+Result factor(const std::string &s, int p)
 {
     Result r = term(s, p);
     while (s[r.p] == '*') {
@@ -36,7 +35,7 @@ Result factor(const string &s, int p)
     return r;
 }
 
-Result term(const string &s, int p)
+Result term(const std::string &s, int p)
 {
     if (s[p] == '(') {
         Result r = equation(s, p+1);
@@ -53,6 +52,6 @@ Result term(const string &s, int p)
 int main(void)
 {
     Result r = equation("(1+2+3)*(4+5+6)");
-    cout << r.value << endl;
+    std::cout << r.value << std::endl;
     return 0;
 }
