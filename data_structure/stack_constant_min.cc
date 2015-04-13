@@ -1,12 +1,9 @@
 #include <iostream>
 #include <stack>
 
-using namespace std;
-
-struct StackMin
+class StackMin
 {
-    StackMin() {}
-
+public:
     bool push(int val) {
         S.push(val);
         if (S_min.empty() || S_min.top() >= val) {
@@ -36,12 +33,19 @@ struct StackMin
         }
     }
 
-    stack<int> S;
-    stack<int> S_min;
+    std::stack<int> S;
+    std::stack<int> S_min;
 };
 
 
 int main()
 {
+    StackMin S;
+
+    S.push(1);
+    S.push(3);
+    S.push(2);
+
+
     return 0;
 }

@@ -4,9 +4,7 @@
 #include <vector>
 #include <limits>
 
-using namespace std;
-
-pair<int, int> first_two_smallest(vector<int> &a)
+std::pair<int, int> first_two_smallest(std::vector<int> &a)
 {
     int f1 = std::numeric_limits<int>::max(), f2 = std::numeric_limits<int>::max();
     int n = a.size();
@@ -20,7 +18,7 @@ pair<int, int> first_two_smallest(vector<int> &a)
         }
     }
 
-    return make_pair(f1, f2);
+    return std::make_pair(f1, f2);
 }
 
 int main()

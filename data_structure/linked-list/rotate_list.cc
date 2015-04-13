@@ -24,8 +24,8 @@ Node<int> *rotate(Node<int> *head, int k)
     if (k == 0) return head;
 
     Node<int> *fast = head;
-    int i = 0;
-    while (fast != nullptr) fast = fast->next, i++;
+    int i = k;
+    while (fast != nullptr && i > 0) fast = fast->next, i--;
 
     Node<int> *slow = head;
     while (fast->next != nullptr) {

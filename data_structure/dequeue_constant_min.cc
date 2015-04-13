@@ -1,12 +1,9 @@
 #include <iostream>
 #include <queue>
 
-using namespace std;
-
-struct DequeueMin
+class DequeueMin
 {
-    DequeueMin() {}
-
+public:
     bool push_rear(int val) {
         Q_elems.push(val);
         if (Q_elems.empty() || Q_elems.front() <= val) {
@@ -22,8 +19,8 @@ struct DequeueMin
         if (Q_elems.front() == Q_min.front()) {
             Q_min.pop();
         }
-        Q_elems.pop();
 
+        Q_elems.pop();
         return true;
     }
 
@@ -34,11 +31,16 @@ struct DequeueMin
         return true;
     }
 
-    queue<int> Q_elems;
-    queue<int> Q_min;
+    std::queue<int> Q_elems;
+    std::queue<int> Q_min;
 };
 
 int main()
 {
+    DequeueMin Q;
+
+    Q.push_rear(1);
+    Q.push_rear(3);
+    Q.push_rear(2);
     return 0;
 }

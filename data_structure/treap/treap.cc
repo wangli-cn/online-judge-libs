@@ -5,7 +5,7 @@ int rand()
 {
     static std::random_device rd;
     static std::mt19937 mt(rd());
-    static std::uniform_int_distribution<> dist(1, 7);
+    static std::uniform_int_distribution<> dist(1, 1000000000);
     return dist(mt);
 }
 

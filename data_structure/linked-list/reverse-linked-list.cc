@@ -1,8 +1,6 @@
 #include <iostream>
 #include "linkedlist.h"
 
-using namespace std;
-
 Node<int> *reverse(Node<int> *curr)
 {
     if (curr->next == nullptr) return curr;

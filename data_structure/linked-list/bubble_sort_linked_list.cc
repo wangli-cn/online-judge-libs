@@ -29,6 +29,8 @@ Node *bubble_sort(Node *head, int cnt)
             p0 = p2;
             p2 = p1->next;
             p3 = (p3->next != nullptr) ? p3->next : nullptr;
+
+            swapped = true;
         } else {
             p0 = p1; p1 = p2; p2 = p3;
             p3 = (p3->next != nullptr) ? p3->next : nullptr;
