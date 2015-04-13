@@ -12,7 +12,7 @@ int egcd(int a, int b, int &x, int &y)
     }
 }
 
-int mod(int x, int n) 
+int mod(int x, int n)
 {
     return (x % n + n) % n;
 }
@@ -22,4 +22,9 @@ int inverse(int a, int n)
     int d, x, y;
     d = egcd(a, n, x, y);
     return d == 1 ? mod(x, n) : -1;
+}
+
+int main()
+{
+    return 0;
 }

@@ -2,13 +2,15 @@
 
 using namespace std;
 
-struct MulMod
+class MulMod
 {
+public:
     int multiplier;
     int modulo;
 
-    MulMod(int mu, int mo) 
-        :multiplier(mu), modulo(mo) {};
+    MulMod() = delete;
+    explicit MulMod(int mu, int mo) :multiplier(mu), modulo(mo) {};
+
     int operator()(int x) {
         return (x * multiplier) % modulo;
     }
@@ -21,9 +23,9 @@ pair<int, int> FloydCycleFinding(MulMod f, int x0)
         tortoise = f(tortoise);
         hare = f(f(hare));
     }
-        
+
     int mu = 0; //the smallest index such that the value x_mu reappears infintely often within the sequence
-    hare = tortoise; tortoise = x0; 
+    hare = tortoise; tortoise = x0;
     while (tortoise != hare) {
         tortoise = f(tortoise);
         hare = f(hare);

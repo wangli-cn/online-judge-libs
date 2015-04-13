@@ -31,6 +31,18 @@ int gcd_iterative3(int a, int b)
     return t * a;
 }
 
+
+int extended_gcd(int a, int b, int &x, int &y)
+{
+    int d;
+    if (!b) { x = 1; y = 0; return a; }
+    else {
+        d = extended_gcd(b, a%b, y, x);
+        y -= (a/b) * x;
+        return d;
+    }
+}
+
 int main()
 {
     std::cout << gcd_recursive(10, 32) << std::endl;
