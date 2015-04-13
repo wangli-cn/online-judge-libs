@@ -2,18 +2,16 @@
 #include <iostream>
 #include <stack>
 
-using namespace std;
-
-void sort_stack(stack<int> &S)
+void sort_stack(std::stack<int> &S)
 {
-    stack<int> dest;
+    std::stack<int> dest;
 
     while (!S.empty()) {
         if (dest.empty() || S.top() >= dest.top()) {
             dest.push(S.top());
             S.pop();
         } else {
-            stack<int> tmp;
+            std::stack<int> tmp;
             while (!dest.empty() && dest.top() > S.top()) {
                 tmp.push(dest.top());
                 dest.pop();
@@ -35,14 +33,14 @@ void sort_stack(stack<int> &S)
 
 int main()
 {
-    stack<int> S;
+    std::stack<int> S;
     for (int i = 10; i >= 1; i--) {
         S.push(i);
     }
 
     sort_stack(S);
     while (!S.empty()) {
-        cout << S.top() << endl;
+        std::cout << S.top() << std::endl;
         S.pop();
     }
 
