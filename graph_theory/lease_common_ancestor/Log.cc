@@ -3,17 +3,17 @@
 #include <algorithm>
 #include <cstdio>
 #include <cstring>
+#include "utils/common.h"
 
-#define REP(i,n) for (int i = 0; i < (int)n; ++i)
-#define FOR(i,c) for (__typeof((c).begin()) i = (c).begin(); i != (c).end(); ++i)
-
-using namespace std;
 
 const int MAXN = 10005;
 const int LOGMAXN = 15;
 
-struct Node 
+class Node
 {
+public:
+    explicit Node() {}
+
     int son;
     int next;
 
@@ -23,7 +23,7 @@ int S[MAXN];
 int depth[MAXN];
 int P[MAXN][LOGMAXN];
 
-void DFS(int v, int d) 
+void DFS(int v, int d)
 {
     S[d] = v; depth[v] = d;
     for (int i = 1; (1 << i) <= d; i++) {
@@ -96,7 +96,7 @@ int main(void)
 
         DFS(root, 0);
 
-        cin >> a >> b;  
+        cin >> a >> b;
         cout << leastCommonAncestor(a, b) << endl;
     }
 
