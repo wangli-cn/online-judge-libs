@@ -138,4 +138,80 @@ void print_tree(Node<int> *root, int indent = 0)
 
 }
 
+namespace tree_class {
+
+    template <class T, class A = std::allocator<T> >
+    class BinarySearchTree
+    {
+        class Node;
+
+    public:
+        typedef A allocator_type;
+        typedef typename A::value_type value_type;
+        typedef typename A::reference reference;
+        typedef typename A::const_reference const_reference;
+        typedef typename A::difference_type difference_type;
+        typedef typename A::size_type size_type;
+
+        class Iterator {
+            public:
+                void operator++() {
+                    if (_node->right) {
+                        _node = BinarySearchTree<T>::_min(_node->right);
+                        return;
+                    }
+
+                    while (_node->parent->right == _node) {
+                        _node = _node->parent;
+                    }
+
+                    if (_node->parent->left == _node) {
+                        _node = _node->parent;
+                        return;
+                    }
+                };
+
+
+                const T& operator*() { return (static_cast<Node *>(_node))->data; }
+                bool operator==(const Iterator &it) { return _node == it._node; }
+                bool operator!=(const Iterator &it) { return !(*this == it); }
+            private:
+                explicit Iterator(Node *node) : _node(node) {}
+                ~Iterator();
+                Node *_node;
+                friend class BinarySearchTree<T>;
+        };
+
+        explicit BinarySearchTree() : _begin(&_tail), _root(nullptr), _count(0) {}
+        ~BinarySearchTree();
+
+        Iterator begin() const { return Iterator(_begin); }
+        Iterator end() const { return Iterator(&_tail); }
+
+    private:
+        struct Node {
+            Node() :parent(nullptr), left(nullptr), right(nullptr) {}
+
+            Node *parent, *left, *right;
+            T data;
+        };
+
+        static Node *_min(Node *node)
+        {
+            Node *result = node;
+            while (result->left != nullptr) {
+                result = result->left;
+            }
+            return result;
+        }
+
+        Node *_begin;
+        Node *_root;
+        mutable Node _tail;
+        unsigned _count;
+    };
+
+
+}
+
 #endif
