@@ -22,6 +22,7 @@
 using LL = long long;
 
 using VI = std::vector<int>;
+using VVI = std::vector< std::vector<int> >;
 using VC = std::vector<char>;
 using VS = std::vector<std::string>;
 
