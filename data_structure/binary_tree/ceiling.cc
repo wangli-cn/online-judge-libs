@@ -1,6 +1,7 @@
 #include <iostream>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
+
+using namespace tree_with_unique_ptr;
 
 int ceiling(Node<int> *root, int target)
 {
@@ -14,10 +15,10 @@ int ceiling(Node<int> *root, int target)
 
     if (root->val < target) {
         return ceiling(root->right.get(), target);
+    } else {
+        int t = ceiling(root->left.get(), target);
+        return (t >= target) ? t : root->val;
     }
-
-    int t = ceiling(root->left.get(), target);
-    return (t >= target) ? t : root->val;
 }
 
 int main(void)
