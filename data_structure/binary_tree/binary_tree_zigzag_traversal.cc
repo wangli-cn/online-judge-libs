@@ -21,21 +21,24 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 #include <queue>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/common.h"
+#include "utils/binary_tree.h"
 
-using namespace std;
+using namespace tree_with_unique_ptr;
 
-vector<vector<int> > zigzag(Node<int> *root)
+VVI zigzag(Node<int> *root)
 {
-    vector<vector<int> > res;
-    vector<int> row;
+    VVI res;
+    VI row;
 
     if (root == nullptr) return res;
 
-    bool left_to_right = true;
-    stack<Node<int> *> currQ, nextQ;
+    bool left_to_right = false;
+    std::queue<Node<int> *> currQ;
+    std::stack<Node<int> *> nextS;
+
     currQ.push(root);
     while (!currQ.empty()) {
         Node<int> *front = currQ.front(); currQ.pop();
@@ -44,11 +47,11 @@ vector<vector<int> > zigzag(Node<int> *root)
             row.push_back(front->val);
 
             if (left_to_right) {
-                if (front->left) nextQ.push(front->left.get());
-                if (front->right) nextQ.push(front->right.get());
+                if (front->right) nextS.push(front->right.get());
+                if (front->left) nextS.push(front->left.get());
             } else {
-                if (front->right) nextQ.push(front->right.get());
-                if (front->left) nextQ.push(front->left.get());
+                if (front->left) nextS.push(front->left.get());
+                if (front->right) nextS.push(front->right.get());
             }
         }
 
@@ -56,18 +59,23 @@ vector<vector<int> > zigzag(Node<int> *root)
             res.push_back(row);
             row.clear();
             left_to_right = !left_to_right;
-            swap(nextQ, currQ);
+
+            while (!nextS.empty()) {
+                auto e = nextS.top(); nextS.pop();
+                currQ.push(e);
+            }
         }
     }
 
     return std::move(res);
 }
 
+
 int main()
 {
     std::unique_ptr<Node<int> > root = build_binary_tree();
 
-    vector<vector<int> > res = zigzag(root.get());
+    VVI res = zigzag(root.get());
     for (auto &r: res) {
         for (auto &c: r) {
             std::cout << c << " ";
