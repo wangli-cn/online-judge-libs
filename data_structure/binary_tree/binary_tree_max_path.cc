@@ -1,8 +1,7 @@
 #include <iostream>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
-using namespace std;
+using namespace tree_with_unique_ptr;
 
 int go(Node<int> *root, int &max_so_far)
 {
@@ -18,7 +17,7 @@ int go(Node<int> *root, int &max_so_far)
     if (max_so_far < max_under_this_node) max_so_far = max_under_this_node;
 
     int res = root->val;
-    return max(res, res+max(left_max,right_max));
+    return std::max(res, res + std::max(left_max, right_max));
 }
 
 int max_path(Node<int> *root)
