@@ -8,10 +8,8 @@
 //============================================================================
 
 #include <iostream>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
-using namespace std;
 using namespace tree_with_unique_ptr;
 
 void go(Node<int> *root, int curr_depth, int &min_depth)
@@ -19,7 +17,7 @@ void go(Node<int> *root, int curr_depth, int &min_depth)
     if (root == nullptr) return;
 
     if (root->left.get() == nullptr && root->right.get() == nullptr) {
-        min_depth = min(min_depth, curr_depth);
+        min_depth = std::min(min_depth, curr_depth);
     }
 
     go(root->left.get(), curr_depth+1, min_depth);

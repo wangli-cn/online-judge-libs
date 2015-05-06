@@ -1,13 +1,13 @@
 #include <iostream>
 #include <stack>
 #include <vector>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/common.h"
+#include "utils/binary_tree.h"
 
 using namespace std;
 using namespace tree_with_normal_ptr;
 
-vector<vector<int> > traverse(Node<int> *root)
+VVI traverse(Node<int> *root)
 {
     vector<vector<int> > res;
     if (root == nullptr) return res;
@@ -42,8 +42,7 @@ vector<vector<int> > traverse(Node<int> *root)
 int main(void)
 {
     Node<int> *root = build_binary_tree();
-
-    vector<vector<int> > res = traverse(root);
+    auto res = traverse(root);
 
     for (auto it1: res) {
         for (auto it2: it1) {

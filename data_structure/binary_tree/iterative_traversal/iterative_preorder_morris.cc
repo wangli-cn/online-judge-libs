@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
 using namespace std;
 using namespace tree_with_normal_ptr;
@@ -12,7 +11,7 @@ void morris_traversal(Node<int> *root)
 
     while (curr != nullptr) {
         if (curr->left == nullptr) {
-            cout << curr->val << endl;
+            std::cout << curr->val << std::endl;
             curr = curr->right;
         } else {
             Node<int> *t = curr->left;

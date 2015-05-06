@@ -2,15 +2,17 @@
 #include <vector>
 #include <queue>
 
+
 struct Node
 {
     int data;
-    vector<Node *> children;
+    std::vector<Node *> children;
 };
+
 
 void print_tree(Node *root)
 {
-    queue<Node *> Q;
+    std::queue<Node *> Q;
     int current_level_counter, next_level_counter;
 
     Q.push(root);
@@ -34,4 +36,10 @@ void print_tree(Node *root)
             cout << endl;
         }
     }
+}
+
+
+int main()
+{
+    return 0;
 }

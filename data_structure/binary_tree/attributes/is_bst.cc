@@ -13,10 +13,9 @@
 #include <iostream>
 #include <memory>
 #include <limits>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
-using namespace std;
+using namespace tree_with_unique_ptr;
 
 bool go(Node<int> *root, Node<int> *&prev)
 {
@@ -34,7 +33,7 @@ bool go(Node<int> *root, Node<int> *&prev)
 
 bool is_bst(Node<int> *root)
 {
-    std::unique_ptr< Node<int> > sentinel( new Node<int>(std::numeric_limits<int>::min()) );
+    auto sentinel = std::make_unique<Node<int>>(std::numeric_limits<int>::min());
     Node<int> *prev = sentinel.get();
     bool res = go(root, prev);
 
@@ -46,10 +45,7 @@ int main()
     std::unique_ptr<Node<int> > root = build_binary_tree();
 
     std::cout << std::boolalpha << is_bst(root.get()) << std::endl;
-
     root->val = 100;
-
     std::cout << std::boolalpha << is_bst(root.get()) << std::endl;
-
     return 0;
 }

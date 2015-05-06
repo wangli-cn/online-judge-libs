@@ -1,16 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
-using namespace std;
 using namespace tree_with_normal_ptr;
 
 void iterative_postorder(Node<int> *root)
 {
-    stack<Node<int> *> S;
-    stack<Node<int> *> SS;
+    std::stack<Node<int> *> S;
+    std::stack<Node<int> *> SS;
 
     S.push(root);
     while (!S.empty()) {
@@ -23,7 +21,7 @@ void iterative_postorder(Node<int> *root)
     }
 
     while (!SS.empty()) {
-        cout << SS.top()->val << endl;
+        std::cout << SS.top()->val << std::endl;
         SS.pop();
     }
 }

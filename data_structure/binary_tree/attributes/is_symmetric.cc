@@ -21,8 +21,7 @@
 //============================================================================
 
 #include <iostream>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
 bool is_symmetric(Node<int> *p, Node<int> *q)
 {

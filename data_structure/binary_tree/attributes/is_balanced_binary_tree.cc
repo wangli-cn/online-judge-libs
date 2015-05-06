@@ -8,8 +8,9 @@
 //============================================================================
 
 #include <iostream>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
+
+using namespace tree_with_unique_ptr;
 
 bool go(Node<int> *root, int &height)
 {
@@ -38,6 +39,6 @@ int main(void)
     std::unique_ptr<Node<int> > root = build_binary_tree();
 
     std::cout << std::boolalpha << is_bst_balanced(root.get()) << std::endl;
-
     return 0;
 }
+

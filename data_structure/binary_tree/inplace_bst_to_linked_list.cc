@@ -2,8 +2,7 @@
 //Convert a BST to a sorted circular doubly-linked list in-place.
 
 #include <iostream>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
 using namespace std;
 
@@ -14,7 +13,7 @@ void go(Node *root, Node *&prev, Node *&head)
     go(root->left, prev, head);
 
     root->left = prev;
-    if (prev != NULL) prev->right = root;
+    if (prev != nullptr) prev->right = root;
     else head = root;
 
     Node *right = root->right;
@@ -28,7 +27,7 @@ void go(Node *root, Node *&prev, Node *&head)
 
 Node *tree2list(Node *root)
 {
-    Node *prev = NULL, *head = NULL;
+    Node *prev = nullptr, *head = nullptr;
     go(root, prev, head);
     return head;
 }
@@ -38,6 +37,5 @@ int main()
     std::unique_ptr<Node<int> > root = build_binary_tree();
 
     std::cout << std::boolalpha << is_bst(root.get()) << std::endl;
-
     return 0;
 }

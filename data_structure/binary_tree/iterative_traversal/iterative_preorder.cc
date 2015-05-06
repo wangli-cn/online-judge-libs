@@ -1,8 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
 using namespace std;
 using namespace tree_with_unique_ptr;
@@ -15,7 +14,7 @@ void iterative_preorder(Node<int> *root)
     while (!S.empty()) {
         Node<int> *curr = S.top(); S.pop();
 
-        cout << curr->val << endl;
+        std::cout << curr->val << std::endl;
         if (curr->right.get() != nullptr) S.push(curr->right.get());
         if (curr->left.get() != nullptr) S.push(curr->left.get());
     }
@@ -29,7 +28,6 @@ int main(void)
     std::unique_ptr<Node<int> > root = build_binary_tree();
 
     iterative_preorder(root.get());
-
     return 0;
 }
 

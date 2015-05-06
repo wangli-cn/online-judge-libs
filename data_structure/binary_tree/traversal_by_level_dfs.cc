@@ -1,3 +1,8 @@
+#include <iostream>
+#include "utils/binary_tree.h"
+
+using namespace tree_with_unique_ptr;
+
 void print_level(Node *root, int level)
 {
     if (p == nullptr) return;
@@ -17,4 +22,9 @@ void print_level_order(Node *root)
         print_level(root, level);
         cout << endl;
     }
+}
+
+int main()
+{
+    return 0;
 }

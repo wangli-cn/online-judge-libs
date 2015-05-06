@@ -17,8 +17,6 @@
 #include <iostream>
 #include <algorithm>
 
-using namespace std;
-
 const int MAXN = 1000;
 int dp[MAXN];
 
@@ -37,13 +35,14 @@ int go(int i)
 
 int num_trees(int n)
 {
-    fill_n(dp, n+1, 0);
+    std::fill_n(dp, n+1, 0);
 
     return go(n);
 }
 
 int main(void)
 {
-    cout << num_trees(3) << endl;
+    std::cout << num_trees(3) << std::endl;
     return 0;
 }
+

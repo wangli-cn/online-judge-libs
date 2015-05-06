@@ -1,8 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <limits>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
 using namespace tree_with_unique_ptr;
 
@@ -57,7 +56,7 @@ std::unique_ptr<Node<int> > remove(std::unique_ptr<Node<int> > root, int k)
         t->left = std::move( go(std::move(t->left), t.get(), k) );
         root = std::move(t->left);
     } else {
-        root = std::move ( go(std::move(root), nullptr, k) );
+        root = std::move( go(std::move(root), nullptr, k) );
     }
 
     return std::move(root);
@@ -66,7 +65,7 @@ std::unique_ptr<Node<int> > remove(std::unique_ptr<Node<int> > root, int k)
 std::unique_ptr<Node<int> > insert(std::unique_ptr<Node<int> > root, int val)
 {
     if (!root) {
-        std::unique_ptr<Node<int> > node(new Node<int>(val));
+        auto node = std::make_unique<Node<int>>(val);
         return std::move(node);
     }
 
@@ -89,7 +88,5 @@ int main(void)
     std::unique_ptr<Node<int> > root3 = remove(std::move(root2), 789);
 
     print_tree(root3.get());
-
-
     return 0;
 }

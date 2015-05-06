@@ -1,8 +1,6 @@
 #include <iostream>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
-using namespace std;
 using namespace tree_with_unique_ptr;
 
 Node<int> *lca(Node<int> *root, Node<int> *p, Node<int> *q)

@@ -1,6 +1,5 @@
 #include <iostream>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
 using namespace tree_with_normal_ptr;
 

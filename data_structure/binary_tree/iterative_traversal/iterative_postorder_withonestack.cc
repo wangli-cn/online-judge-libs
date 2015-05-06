@@ -1,15 +1,13 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-#include "binarytree.h"
-#include "test_util.h"
+#include "utils/binary_tree.h"
 
-using namespace std;
 using namespace tree_with_normal_ptr;
 
 void iterative_postorder(Node<int> *root)
 {
-    stack<Node<int> *> S;
+    std::stack<Node<int> *> S;
     Node<int> *curr = nullptr, *prev = nullptr;
 
     S.push(root);
@@ -20,7 +18,7 @@ void iterative_postorder(Node<int> *root)
             if (curr->left) S.push(curr->left);
             else if (curr->right) S.push(curr->right);
             else {
-                cout << curr->val << endl;
+                std::cout << curr->val << std::endl;
                 S.pop();
             }
         } else if (curr->left == prev) {
@@ -31,7 +29,7 @@ void iterative_postorder(Node<int> *root)
                 S.pop();
             }
         } else if (curr->right == prev) {
-            cout << curr->val << endl;
+            std::cout << curr->val << std::endl;
             S.pop();
         }
 
@@ -45,7 +43,6 @@ int main(void)
     Node<int> *root = build_binary_tree();
 
     iterative_postorder(root);
-
     return 0;
 }
 

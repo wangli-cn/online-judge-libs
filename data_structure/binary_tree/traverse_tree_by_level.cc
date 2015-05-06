@@ -22,17 +22,16 @@
 #include <vector>
 #include <queue>
 
-using namespace std;
-
 struct Node
 {
     int data;
-    vector<Node *> children;
+    std::vector<Node *> children;
 };
+
 
 void print_tree(Node *root)
 {
-    queue<Node *> Q;
+    std::queue<Node *> Q;
     int current_level_counter, next_level_counter;
 
     Q.push(root);
@@ -43,7 +42,7 @@ void print_tree(Node *root)
         Node *nd = Q.front(); Q.pop();
 
         current_level_counter -= 1;
-        cout << nd->data << " ";
+        std::cout << nd->data << " ";
 
         for (int i = 0; i < nd->children.size(); i++) {
             Q.push(nd->children[i]);
@@ -53,7 +52,7 @@ void print_tree(Node *root)
         if (current_level_counter == 0) {
             current_level_counter = next_level_counter;
             next_level_counter = 0;
-            cout << endl;
+            std::cout << std::endl;
         }
     }
 }
